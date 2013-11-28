@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Android2Mouse</title>
+
+	<style>
+		
+		body {
+			font-family:"Century Gothic","Lucida Grande",Arial,sans-serif;
+		}
+		
+		#main_box { 
+			margin-left:auto;
+			margin-right: auto;
+			width: 50%;
+			min-height: 400px;
+			padding-top: 200px;
+		
+		}
+		.pointer {
+			border: 1px solid rgb(201, 201, 201);
+			background: #eef;
+		}
+		.nice-square {
+			border: 1px solid rgb(201, 201, 201);			
+			border-radius: 4px;	
+		}
+		#navigation {
+			list-style: none;
+		    	vertical-align: top;
+		}
+		#navigation > div{
+			width: 210px;
+		    	font-size: 16px;
+		}
+		
+		#upper-bar{
+			height : 52px;
+		}
+		#upper-bar td{
+			width: 500px;
+		}
+
+		#logo{
+			width: 215px; 
+			height : 52px;
+		}
+		#content {		
+		    	padding: 10px 20px;	
+		}
+
+	</style>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>	
+
+	
+</head>
+<body>
+<table> 
+<tr> 
+		<td>
+			<div class="nice-square" id="logo">
+			<img src="logo.png" width="210px" height="50px"/>
+			</div>
+		</td>	
+		<td>
+			<div class="nice-square"  id="upper-bar">
+			<table>
+			<tr>
+			<td><a href="index.html"> Home</a></td>
+			<td><a href="howTo.html"> How-To</a></td>
+			<td><a href="about.html"> About</a></td>
+			</tr>
+			</table>
+			</div>
+		</td>
+	</tr>
+	<tr> 
+	<td colspan="2">
+	<div id="content" class="nice-square">
+	<h1>Android2Mouse</h1>
+	<p>This project turns your phone in a Bluetooth mouse, rather useful - in case you need to control the mouse pointer remotely.Before installing it you should consider that it has certain advantages and disadvantages.<br>
+		Advantages:<br>
+		<ul>
+			<li>Don't depend on third-party software installed on the host machine(as other projects do).</li>
+			<li>Could be used with <b>any</b> devices that support Bluetooth mouses, in other words Linux, Mac, BSD, Windows, it will work equally well with any of them.</li>
+		</ul>
+		Disadvantages:<br>
+		<ul>
+			<li>You should have root permissions on your phone(it should be rooted).</li>
+			<li>It is moderately difficult to make it to work in some situations(see <a href="">known bugs</a>). </li>
+			<li>It is moderately difficult to install it(see <a href="">how to install</a>). </li>
+		</ul>
+	Well, if you are still with us then you can proceed to the <a href=""> installation guide</a>.
+	</p>
+		
+		</div>
+	</p>
+	</div>
+	</td>
+</tr></table>
+	
+
+</body>
+</html>

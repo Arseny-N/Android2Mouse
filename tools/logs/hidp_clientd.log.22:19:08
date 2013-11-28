@@ -1,0 +1,113 @@
+[0]:DBG: main:reading connection header
+[1]:DBG: read_connection_header:addr:7C:E9:D3:B7:D3:9E
+[2]:INF: main:Start
+[3]:INF: l2cap_connect:Connection enstablished.
+
+[4]:INF: l2cap_connect:Connection enstablished.
+
+[5]:INF: print_sockopts:INT:
+[6]:INF: print_sockopts:	IMTU(672) OMTU(672)
+[7]:INF: print_sockopts:CNT:
+[8]:INF: print_sockopts:	IMTU(672) OMTU(672)
+[9]:INF: main:cnt_sock(13),int_sock(15),src_fd(11)
+[10]:INF: main:Started polling.
+
+[11]:INF: main:POLLIN:1
+[12]:INF: peek_hidp_hdr:Peeking hdr sk=15
+[13]:INF: process_sk:Got pkt (a2)
+[14]:DBG: process_sk:processing pkt with method
+[15]:INF: pkt_drop:Dropping: (a2)
+[16]:INF: drop_hidp_pkt:Reciving pkt on 15, size=1, falgs=0
+[17]:INF: main:POLL-OK
+[18]:INF: main:POLLIN:2
+[19]:DBG: process_mouse:processing mouse (-17, 13, 0)
+[20]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[21]:DBG: send_hidp_pkt:sent=6
+[22]:DBG: process_mouse:processing mouse (-8, 9, 0)
+[23]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[24]:DBG: send_hidp_pkt:sent=6
+[25]:DBG: process_mouse:processing mouse (-8, 8, 0)
+[26]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[27]:DBG: send_hidp_pkt:sent=6
+[28]:DBG: process_mouse:processing mouse (-8, 9, 0)
+[29]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[30]:DBG: send_hidp_pkt:sent=6
+[31]:DBG: process_mouse:processing mouse (-4, 6, 0)
+[32]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[33]:DBG: send_hidp_pkt:sent=6
+[34]:DBG: process_mouse:processing mouse (-2, 5, 0)
+[35]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[36]:DBG: send_hidp_pkt:sent=6
+[37]:DBG: process_mouse:processing mouse (-1, 3, 0)
+[38]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[39]:DBG: send_hidp_pkt:sent=6
+[40]:DBG: process_mouse:processing mouse (0, 1, 0)
+[41]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[42]:DBG: send_hidp_pkt:sent=6
+[43]:DBG: process_mouse:processing mouse (3, -2, 0)
+[44]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[45]:DBG: send_hidp_pkt:sent=6
+[46]:DBG: process_mouse:processing mouse (6, -8, 0)
+[47]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[48]:DBG: send_hidp_pkt:sent=6
+[49]:DBG: process_mouse:processing mouse (8, -8, 0)
+[50]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[51]:DBG: send_hidp_pkt:sent=6
+[52]:DBG: process_mouse:processing mouse (8, -7, 0)
+[53]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[54]:DBG: send_hidp_pkt:sent=6
+[55]:DBG: process_mouse:processing mouse (7, -7, 0)
+[56]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[57]:DBG: send_hidp_pkt:sent=6
+[58]:DBG: process_mouse:processing mouse (6, -6, 0)
+[59]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[60]:DBG: send_hidp_pkt:sent=6
+[61]:DBG: process_mouse:processing mouse (4, -4, 0)
+[62]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[63]:DBG: send_hidp_pkt:sent=6
+[64]:DBG: process_mouse:processing mouse (3, -1, 0)
+[65]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[66]:DBG: send_hidp_pkt:sent=6
+[67]:DBG: process_mouse:processing mouse (0, 2, 0)
+[68]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[69]:DBG: send_hidp_pkt:sent=6
+[70]:DBG: process_mouse:processing mouse (-5, 9, 0)
+[71]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[72]:DBG: send_hidp_pkt:sent=6
+[73]:DBG: process_mouse:processing mouse (-5, 15, 0)
+[74]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[75]:DBG: send_hidp_pkt:sent=6
+[76]:DBG: process_mouse:processing mouse (-6, 18, 0)
+[77]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[78]:DBG: send_hidp_pkt:sent=6
+[79]:DBG: process_mouse:processing mouse (-3, 13, 0)
+[80]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[81]:DBG: send_hidp_pkt:sent=6
+[82]:DBG: process_mouse:processing mouse (-2, 9, 0)
+[83]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[84]:DBG: send_hidp_pkt:sent=6
+[85]:DBG: process_mouse:processing mouse (0, 4, 0)
+[86]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[87]:DBG: send_hidp_pkt:sent=6
+[88]:DBG: process_mouse:processing mouse (0, 1, 0)
+[89]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[90]:DBG: send_hidp_pkt:sent=6
+[91]:DBG: process_mouse:processing mouse (4, -3, 0)
+[92]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[93]:DBG: send_hidp_pkt:sent=6
+[94]:DBG: process_mouse:processing mouse (8, -11, 0)
+[95]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[96]:DBG: send_hidp_pkt:sent=6
+[97]:DBG: process_mouse:processing mouse (6, -12, 0)
+[98]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[99]:DBG: send_hidp_pkt:sent=6
+[100]:DBG: process_mouse:processing mouse (3, -15, 0)
+[101]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[102]:DBG: send_hidp_pkt:sent=6
+[103]:DBG: process_mouse:processing mouse (0, -17, 0)
+[104]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[105]:DBG: send_hidp_pkt:sent=6
+[106]:DBG: process_mouse:processing mouse (2, -14, 0)
+[107]:INF: send_hidp_pkt:Sk: 15 Pkt: (05) (cache=16,data=0x12f9838)
+[108]:DBG: send_hidp_pkt:sent=6
+[109]:DBG: process_mouse:processing mouse (0, -13, 0)
