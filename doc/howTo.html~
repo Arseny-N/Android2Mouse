@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Android2Mouse</title>
+
+	<style>
+		
+		body {
+			font-family:"Century Gothic","Lucida Grande",Arial,sans-serif;
+		}
+		
+		#main_box { 
+			margin-left:auto;
+			margin-right: auto;
+			width: 50%;
+			min-height: 400px;
+			padding-top: 200px;
+		
+		}
+		.pointer {
+			border: 1px solid rgb(201, 201, 201);
+			background: #eef;
+		}
+		.nice-square {
+			border: 1px solid rgb(201, 201, 201);			
+			border-radius: 4px;	
+		}
+		#navigation {
+			list-style: none;
+		    	vertical-align: top;
+		}
+		#navigation > div{
+			width: 210px;
+		    	font-size: 16px;
+		}
+		
+		#upper-bar{
+			height : 52px;
+		}
+		#upper-bar td{
+			width: 500px;
+		}
+
+		#logo{
+			height : 52px;
+		}
+		#content {		
+		    	padding: 10px 20px;	
+		}
+
+	</style>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>	
+
+	
+</head>
+<body>
+<table> 
+<tr> 
+		<td>
+			<div class="nice-square" id="logo">
+			<img src="logo.png" width="210px" height="50px"/>
+			</div>
+		</td>	
+		<td>
+			<div class="nice-square"  id="upper-bar">
+			<table>
+			<tr>
+			<td><a href="index.html"> Home</a></td>
+			<td><a href="howTo.html"> How-To</a></td>
+			<td><a href="about.html"> About</a></td>
+			</tr>
+			</table>
+			</div>
+		</td>
+	</tr>
+	<tr> <td id="navigation">
+	<div class="nice-square">
+	<ul>
+		<li><a href="#what-you-need">What you will need.</a></li>
+		<li><a href="#how-to-root">How to root.</a></li>
+		<li><a href="#how-to-install">How to install it.</a></li>
+		<li><a href="#how-to-run">How to run it.</a></li>
+		<li><a href="#in-case">In case it do not work.</a></li>
+		<li><a href="#how-does-it-work">How does it work.</a></li>
+
+	</ul>
+	</div>
+	</td>
+	<td>
+	<div id="content" class="nice-square">
+	<h1>Android2Mouse</h1>
+	<p><b>This tutorial will explain you how to setup the "Android2Mouse" program set on your android phone and how to use it.</b>
+
+	<h2 id="what-you-need">What you will need.</h2>
+	<p>
+		<ul>
+			<li>A rooted phone running android with bluetooth support.</li>
+			<li>A PC with bluetooth support (hidp).</li>
+			<li>The "Android2Mouse" package.</li>
+			<li>A usb cable.</li>
+			<li>Patience.</li>
+		</ul>
+	</p>
+	<h2 id="how-to-root"> How to root your phone.</h2>
+	<p>
+		A good rooting package (which I use) is <a href="...."> SuperSu</a>, 
+		well it is not completely free but it's "unrated" part is suitable for our purpose, we will not go in further details here.
+	</p>
+	<h2 id="how-to-install"> How to install <b>Android2Mouse</b>.</h2>
+	<p>
+		There is no cross-platform method of installing the <b>Android2Mouse</b> package.
+		<h3>*nix folks</h3>
+		<p>
+			<ul>
+			<li> Install the <code> adb </code> and  <code> ant </code> program. (<code> sudo yum install adb </code> or with <code>sudo apt-get install adb</code>)</li>
+			<li> Double click the <code> install.sh</code> </li>
+			
+			</ul>
+		</p>
+	</p>
+	<h2 id="how-to-run"> How to run the suite.</h2>
+	<p>
+		If everything is fine now you should have now two new apps - "Became A Mouse" and "Bluetooth Mouse".<br>
+		To make everything work do the following: 
+		<ul>
+		<li>Switch on the Bluetooth.</li>
+		<li>Run the "became a mouse" app (grant it superuser permissions) push the become a mouse button - now your phone will be seen as a Bluetooth mouse buy all the other devices, you can close the app.
+		</li>
+		<li>
+		Start a search of devices and pair your phone with the target one.<b> Warning, do it from your phone, doing otherwise may result in failures.</b>
+		
+		</li>
+		<li>
+		Run the "Bluetooth Mouse" app, find the target device in the list and tap on it.
+		</li>
+		<li>
+		Congratulations! Now you can use your phone screen as a touch-pad.
+		</li>
+		</ul>
+		
+	</p>
+	<h2 id="in-case"> In case it do not work or known bugs.</h2>
+	<p>
+		Well, to be honest Bluetooth was not thought to be used like that (i.e. dynamically changing device attributes like the "become a mouse" app do), and it's also sometimes a <b>little</b> bit buggy, debugging Bluetooth it is a rather difficult task (kind of black magic), so if everything works from the first time you are rather lucky.<br>
+		If not, the possible sources of failures are:
+<ul>
+		<li>No root privileges.</li>
+		<p>
+			Run a terminal app on your device and tap there <code>su -c id</code> if the output is something like <code>uid=0(root) gid=0(root)</code> you are rooted. That's not the cause.
+		</p>
+		<li>Cached Bluetooth credentials.</li>
+		<p>
+			Remove the pair on both devices and pair them again.
+			
+			Also could be useful a reboot of the phone after the dispairing or a toggle of the bluetooth on the host machine.
+			
+			In case of *nix a <code>sudo rm -rf /lib/var/bluetooth </code>
+			
+			may help, if you do so you remove all the <code>bluetoothd</code> cache
+			so after doing this you will lose all the paired devices(not a big waste),then restart the daemon <code> systemctrl restart blurtoothd </code> .
+		</p>
+		<li>If you are hardcore.</li>
+		<p>
+			Nothing works and you <b>need</b> that app to work try to run <code> adb shell</code> [<a href=..>more</a>]
+			then run <code> !!!!! /data/hidp_client.log</code>. What is outputed? If the error is "Host is down" than try the upper-mentioned method of cached Bluetooth creds.
+			Or run the <code>/data/Androin2Mouse_hello</code>.If the executable refuses to run giving wired elf errors try to recompile it, to do this <a href="...">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). From the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
+		</p>
+		</ul>
+
+	</p>
+	<h2 id="how-does-it-work"> How does it work.</h2>
+	<p>
+		If you are even more hardcore and want to figure out how the program accomplish it's task then read below.<br>
+		The program could be broken in three main parts: the <code> hidp_clientd</code> or daemon, the <code> bmouse</code> or attribute changer and the gui.
+		<h3>The daemon.</h3>
+		<p>
+			It's main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="...">hidp spec</a>.However not all the spec is implemented - it drops packets received from the host because I never receved one, so I considered it a waste of time to implement this.Sometimes it bizarrely hangs, so when you quit the giu a <code>pkill hidp_clientd</code> is triggered.
+		</p>
+		<h3>The attribute changer.</h3>
+		It's main task is to add an sdp record and change the CoD of the device [<a href="...">more</a>].
+		<div class="pointer"><i>The Bluetooth stack is the most undocumented thing I ever come through .So in case you are in the process of figuring out something a good place for doing this is the <code>bluez</code> package, if more precisely the <code>tools/</code> directory. The sdp_lib.h api is well shown in the sdp tool,the hci_lib api in the hcitool and so on.</i></div>
+		<h3>The GUI.</h3>
+		<p>
+		It's main task is to list all the paired devices available on the phone, get the address of the one chosen buy the user, send it to the daemon and interpret gestures via the <a href="...">GestueDetector</a> lib sending them to the daemon via a <a href="..">JNI library</a> specially written for this purpose.
+		</p>
+		
+		
+		</div>
+	</p>
+	</div>
+	</td>
+</tr></table>
+	
+
+</body>
+</html>
