@@ -105,7 +105,7 @@
 	</p>
 	<h2 id="how-to-root"> How to root your phone.</h2>
 	<p>
-		A good rooting package (which I use) is <a href="...."> SuperSu</a>, 
+		A good rooting package (which I use) is <a href="https://play.google.com/store/apps/details?id=eu.chainfire.supersu"> SuperSu</a>, 
 		well it is not completely free but it's "unrated" part is suitable for our purpose, we will not go in further details here.
 	</p>
 	<h2 id="how-to-install"> How to install <b>Android2Mouse</b>.</h2>
@@ -114,7 +114,9 @@
 		<h3>*nix folks</h3>
 		<p>
 			<ul>
-			<li> Install the <code> adb </code> and  <code> ant </code> program. (<code> sudo yum install adb </code> or with <code>sudo apt-get install adb</code>)</li>
+			<li> Download the Android2Mouse package <a href="https://github.com/Arseny-N/Android2Mouse">here</a></li>
+			<li> Install the <code> adb </code> program. (<code> sudo yum install adb </code> or with <code>sudo apt-get install adb</code>)</li>
+			<li> Plug in the phone.</li>
 			<li> Double click the <code> install.sh</code> </li>
 			
 			</ul>
@@ -164,8 +166,8 @@
 		<li>If you are hardcore.</li>
 		<p>
 			Nothing works and you <b>need</b> that app to work try to run <code> adb shell</code> [<a href=..>more</a>]
-			then run <code> !!!!! /data/hidp_client.log</code>. What is outputed? If the error is "Host is down" than try the upper-mentioned method of cached Bluetooth creds.
-			Or run the <code>/data/Androin2Mouse_hello</code>.If the executable refuses to run giving wired elf errors try to recompile it, to do this <a href="...">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). From the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
+			then run <code> cat /data/hidp_clientd.log</code>. What is outputed? If the error is "Host is down" than try the upper-mentioned method of cached Bluetooth creds.
+			Or run the <code>/data/bmouse</code>.If the executable refuses to run giving wired elf errors try to recompile it, to do this <a href="http://thetechcaptain.blogspot.ru/2012/08/how-to-cross-compile-c-code-for-android.html">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). From the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
 		</p>
 		</ul>
 
@@ -176,14 +178,14 @@
 		The program could be broken in three main parts: the <code> hidp_clientd</code> or daemon, the <code> bmouse</code> or attribute changer and the gui.
 		<h3>The daemon.</h3>
 		<p>
-			It's main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="...">hidp spec</a>.However not all the spec is implemented - it drops packets received from the host because I never receved one, so I considered it a waste of time to implement this.Sometimes it bizarrely hangs, so when you quit the giu a <code>pkill hidp_clientd</code> is triggered.
+			It's main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">hidp spec</a>.However not all the spec is implemented - it drops packets received from the host because I never receved one, so I considered it a waste of time to implement this.Sometimes it bizarrely hangs, so when you quit the giu a <code>pkill hidp_clientd</code> is triggered.
 		</p>
 		<h3>The attribute changer.</h3>
-		It's main task is to add an sdp record and change the CoD of the device [<a href="...">more</a>].
+		It's main task is to add an sdp record and change the CoD of the device [<a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">more</a>].
 		<div class="pointer"><i>The Bluetooth stack is the most undocumented thing I ever come through .So in case you are in the process of figuring out something a good place for doing this is the <code>bluez</code> package, if more precisely the <code>tools/</code> directory. The sdp_lib.h api is well shown in the sdp tool,the hci_lib api in the hcitool and so on.</i></div>
 		<h3>The GUI.</h3>
 		<p>
-		It's main task is to list all the paired devices available on the phone, get the address of the one chosen buy the user, send it to the daemon and interpret gestures via the <a href="...">GestueDetector</a> lib sending them to the daemon via a <a href="..">JNI library</a> specially written for this purpose.
+		It's main task is to list all the paired devices available on the phone, get the address of the one chosen buy the user, send it to the daemon and interpret gestures via the <a href="https://developer.android.com/reference/android/view/GestureDetector.html">GestueDetector</a> lib sending them to the daemon via a <a href="..">JNI library</a> specially written for this purpose.
 		</p>
 		
 		
