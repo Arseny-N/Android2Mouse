@@ -1,0 +1,17 @@
+[logo.png] Home How-To About
+****** Android2Mouse ******
+This project turns your phone in a Bluetooth mouse, rather useful - in case
+you need to control the mouse pointer remotely.Before installing it you should
+consider that it has certain advantages and disadvantages.
+Advantages:
+    * Don't depend on third-party software installed on the host machine(as
+      other projects do).
+    * Could be used with any devices that support Bluetooth mouses, in other
+      words Linux, Mac, BSD, Windows, it will work equally well with any of
+      them.
+Disadvantages:
+    * You should have root permissions on your phone(it should be rooted).
+    * It is moderately difficult to make it to work in some situations(see
+      known bugs).
+    * It is moderately difficult to install it(see how to install).
+Well, if you are still with us then you can proceed to the installation guide.

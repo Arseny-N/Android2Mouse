@@ -1,0 +1,121 @@
+[logo.png]                    Home How-To About
+                              ****** Android2Mouse ******
+                              This tutorial will explain you how to setup the
+                              "Android2Mouse" program set on your android phone
+                              and how to use it.
+                              ***** What you will need. *****
+                                  * A rooted phone running android with
+                                    bluetooth support.
+                                  * A PC with bluetooth support (hidp).
+                                  * The "Android2Mouse" package.
+                                  * A usb cable.
+                                  * Patience.
+                              ***** How to root your phone. *****
+                              A good rooting package (which I use) is SuperSu,
+                              well it is not completely free but it's "unrated"
+                              part is suitable for our purpose, we will not go
+                              in further details here.
+                              ***** How to install Android2Mouse. *****
+                              There is no cross-platform method of installing
+                              the Android2Mouse package.
+                              **** *nix folks ****
+                                  * Install the adb and ant program. (sudo yum
+                                    install adb or with sudo apt-get install
+                                    adb)
+                                  * Double click the install.sh
+                              ***** How to run the suite. *****
+                              If everything is fine now you should have now two
+                              new apps - "Became A Mouse" and "Bluetooth
+                              Mouse".
+                              To make everything work do the following:
+                                  * Switch on the Bluetooth.
+                                  * Run the "became a mouse" app (grant it
+                                    superuser permissions) push the become a
+                                    mouse button - now your phone will be seen
+                                    as a Bluetooth mouse buy all the other
+                                    devices, you can close the app.
+                                  * Start a search of devices and pair your
+                                    phone with the target one.Warning, do it
+                                    from your phone, doing otherwise may result
+                                    in failures.
+                                  * Run the "Bluetooth Mouse" app, find the
+                                    target device in the list and tap on it.
+                                  * Congratulations! Now you can use your phone
+                                    screen as a touch-pad.
+                              ***** In case it do not work or known bugs. *****
+                              Well, to be honest Bluetooth was not thought to
+                              be used like that (i.e. dynamically changing
+                              device attributes like the "become a mouse" app
+                              do), and it's also sometimes a little bit buggy,
+                              debugging Bluetooth it is a rather difficult task
+                              (kind of black magic), so if everything works
+                              from the first time you are rather lucky.
+                              If not, the possible sources of failures are:
+                                  * No root privileges.
+                                    Run a terminal app on your device and tap
+                                    there su -c id if the output is something
+                                    like uid=0(root) gid=0(root) you are
+                                    rooted. That's not the cause.
+    * What_you_will_need.         * Cached Bluetooth credentials.
+    * How_to_root.                  Remove the pair on both devices and pair
+    * How_to_install_it.            them again. Also could be useful a reboot
+    * How_to_run_it.                of the phone after the dispairing or a
+    * In_case_it_do_not_work.       toggle of the bluetooth on the host
+    * How_does_it_work.             machine. In case of *nix a sudo rm -rf /
+                                    lib/var/bluetooth may help, if you do so
+                                    you remove all the bluetoothd cache so
+                                    after doing this you will lose all the
+                                    paired devices(not a big waste),then
+                                    restart the daemon systemctrl restart
+                                    blurtoothd .
+                                  * If you are hardcore.
+                                    Nothing works and you need that app to work
+                                    try to run adb shell [more] then run !!!!!
+                                    /data/hidp_client.log. What is outputed? If
+                                    the error is "Host is down" than try the
+                                    upper-mentioned method of cached Bluetooth
+                                    creds. Or run the /data/
+                                    Androin2Mouse_hello.If the executable
+                                    refuses to run giving wired elf errors try
+                                    to recompile it, to do this install_the
+                                    cross-compiling_tool-chain (should be a
+                                    debian/ubuntu folk, fedora don't support
+                                    arm-gcc fully, it supports it with no Glibc
+                                    so it is only useful for compiling
+                                    kernels). From the root dir of the project
+                                    run make BuildBin then make InstallBin.
+                              ***** How does it work. *****
+                              If you are even more hardcore and want to figure
+                              out how the program accomplish it's task then
+                              read below.
+                              The program could be broken in three main parts:
+                              the hidp_clientd or daemon, the bmouse or
+                              attribute changer and the gui.
+                              **** The daemon. ****
+                              It's main task is to establish a l2cap connection
+                              with psm equal 0x11 and 0x13, read data from the
+                              command fifo(/data/hidp_clientd.fifo), interpret
+                              it and send via the l2cap sockets, this is done
+                              as written in the hidp_spec.However not all the
+                              spec is implemented - it drops packets received
+                              from the host because I never receved one, so I
+                              considered it a waste of time to implement
+                              this.Sometimes it bizarrely hangs, so when you
+                              quit the giu a pkill hidp_clientd is triggered.
+                              **** The attribute changer. ****
+                              It's main task is to add an sdp record and change
+                              the CoD of the device [more].
+                              The Bluetooth stack is the most undocumented
+                              thing I ever come through .So in case you are in
+                              the process of figuring out something a good
+                              place for doing this is the bluez package, if
+                              more precisely the tools/ directory. The
+                              sdp_lib.h api is well shown in the sdp tool,the
+                              hci_lib api in the hcitool and so on.
+                              **** The GUI. ****
+                              It's main task is to list all the paired devices
+                              available on the phone, get the address of the
+                              one chosen buy the user, send it to the daemon
+                              and interpret gestures via the GestueDetector lib
+                              sending them to the daemon via a JNI_library
+                              specially written for this purpose.
