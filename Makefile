@@ -2,6 +2,7 @@
 ANT ?= ant
 ADB ?= adb
 MAKE ?= make
+CFALGS ?= -Wall
 ANT_MODE ?= debug
 CC = arm-linux-gnueabi-gcc
 
@@ -16,9 +17,8 @@ testSu:
 testElf: InstallBin
 	$(ADB) shell su -c /data/bmouse cod
 BuildBin:
-	cd ./src/bin/bmouse; $(MAKE) CC=$(CC); cp bmouse ../../../build 
-	cd ./src/bin/hidp_clientd; $(MAKE) CC=$(CC); cp hidp_clientd ../../../build
-	cd ./src/bin/system-hidp_clientd; $(MAKE) CC=$(CC); cp hidp_clientd_system ../../../build
+	cd ./src/bin/bmouse; $(MAKE) CC=$(CC) CFALGS=$(CFLAGS); cp bmouse ../../../build 
+	cd ./src/bin/hidp_clientd; $(MAKE) CC=$(CC) CFALGS=$(CFLAGS); cp hidp_clientd ../../../build
 BuildGui:
 	cd ./src/becomeAMouse; $(ANT) $(ANT_MODE); cd jni; ndk-build; cd ..; cp ./bin/becomeAMouse.apk ../../build;
 	cd ./src/BluetoothMouse; $(ANT) $(ANT_MODE);cd jni; ndk-build; cd ..; cp ./bin/BluetoothMouse.apk ../../build;
