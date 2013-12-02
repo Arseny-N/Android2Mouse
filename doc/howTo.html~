@@ -164,7 +164,7 @@
 		</p>
 		<li>Not that elf.</li>
 		<p>
-		Run the <code>/data/bmouse</code>.Normally it will output a usage message but if the executable refuses to run giving wired elf errors then out arhces don't match (quite unprababble), try to recompile it, to do this <a href="http://thetechcaptain.blogspot.ru/2012/08/how-to-cross-compile-c-code-for-android.html">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). Add the needed CFLAGS in the Makefile and From the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
+		Run the <code>/data/bmouse</code>.Normally it will output a usage message but if the executable refuses to run giving wired elf errors then out arhces don't match (quite unprababble), try to recompile it, to do this <a href="http://thetechcaptain.blogspot.ru/2012/08/how-to-cross-compile-c-code-for-android.html">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). Add the needed CFLAGS in the Makefile and from the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
 		</p>
 		<li>If you are hardcore.</li>
 		<p>
