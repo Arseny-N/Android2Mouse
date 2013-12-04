@@ -69,7 +69,7 @@
 			<tr>
 			<td><a href="index.html"> Home</a></td>
 			<td><a href="howTo.html"> How-To</a></td>
-			<td><a href="about.html"> About</a></td>
+			<td><a href="about.html"> Resources</a></td>
 			</tr>
 			</table>
 			</div>
@@ -111,9 +111,18 @@
 	<h2 id="how-to-install"> How to install <b>Android2Mouse</b>.</h2>
 	<p>
 		There is no cross-platform method of installing the <b>Android2Mouse</b> package.
+		<h3>Windows</h3>
+		<p>
+			<ul>
+			<li> Root your phone.</li>
+			<li> Download the Android2Mouse package <a href="https://github.com/Arseny-N/Android2Mouse">here</a></li>
+			<li> Run the <code> install.bat</code> </li>
+			</ul>
+		</p>
 		<h3>*nix folks</h3>
 		<p>
 			<ul>
+			<li> Root your phone.</li>
 			<li> Download the Android2Mouse package <a href="https://github.com/Arseny-N/Android2Mouse">here</a></li>
 			<li> Install the <code> adb </code> program. (<code> sudo yum install adb </code> or with <code>sudo apt-get install adb</code>)</li>
 			<li> Plug in the phone.</li>
