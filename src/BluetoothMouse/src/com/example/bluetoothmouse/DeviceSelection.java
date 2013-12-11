@@ -80,6 +80,9 @@ public class DeviceSelection extends ListActivity {
         case 1:
            fillData();
            return true;
+        case 2:
+        	
+        	return true;
         }
        
         return super.onOptionsItemSelected(item);

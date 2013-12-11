@@ -21,6 +21,7 @@ public class HidpBcaster {
 		return false;
 	}
 	public static boolean StartSession(String address) {
+		
 		 try {
            server = Runtime.getRuntime().exec("su -c /data/hidp_clientd");
         } catch (Exception e) {
@@ -30,15 +31,19 @@ public class HidpBcaster {
 		
 		return isServerRunning() ? InitBcast(address) : false;
 		//return InitBcast(address);
+		 
+		
 	}
 	
 	public static boolean EndSession() {
 		boolean r = EndBcast();
+		
 		try {
 			Runtime.getRuntime().exec("su -c busybox pkill hidp_clientd");
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}
+		
 		return r;
 		
 	}
