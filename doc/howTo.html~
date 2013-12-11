@@ -125,7 +125,6 @@
 			<li> Root your phone.</li>
 			<li> Download the Android2Mouse package <a href="https://github.com/Arseny-N/Android2Mouse">here</a></li>
 			<li> Install the <code> adb </code> program. (<code> sudo yum install adb </code> or with <code>sudo apt-get install adb</code>)</li>
-			<li> Plug in the phone.</li>
 			<li> Double click the <code> install.sh</code> </li>
 			
 			</ul>
