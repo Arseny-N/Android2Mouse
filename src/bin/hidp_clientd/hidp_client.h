@@ -17,7 +17,7 @@ struct connection_header {
 #define HCR_SHUTDOWN 	01
 
 
-#define FIFO_PATH "/data/hidp_clientd.fifo"
+// #define FIFO_PATH "/data/hidp_clientd.fifo"
 #define FIFO_MODE 0777
 
 int start_session(char *addr);

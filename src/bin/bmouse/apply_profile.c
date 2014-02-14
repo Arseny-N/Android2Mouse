@@ -24,11 +24,23 @@ usage:
 	
 	if(strcmp(argv[1], "mouse") == 0) {
 		int handle;
-		if(add_sdp_record(&hid_mouse, &handle)) {
+		if(add_sdp_record(&hid_mouse, NULL, &handle)) {
 			error("failed to apply repr");
 			exit(EXIT_FAILURE);
 		}
-		if(set_dev_class(DC_MOBILE)) {
+		if(set_dev_class(DC_MOUSE)) {
+			error("failed to set dev class");
+			exit(EXIT_FAILURE);
+		}
+		printf("0x%x\n", handle);
+	}
+	if(strcmp(argv[1], "multi") == 0) {
+		int handle;
+		if(add_sdp_record(&hid_multi, NULL, &handle)) {
+			error("failed to apply repr");
+			exit(EXIT_FAILURE);
+		}
+		if(set_dev_class(DC_MOUSE)){
 			error("failed to set dev class");
 			exit(EXIT_FAILURE);
 		}

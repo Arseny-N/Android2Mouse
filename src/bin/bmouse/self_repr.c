@@ -45,14 +45,21 @@ int _set_dev_class(uint32_t class, int dev_id)
 	return 0;
 }
 
-int add_sdp_record(struct sdp_record_builder *rep, int *handle)
+int add_sdp_record(struct sdp_record_builder *rep, char *args, int *handle)
 {
 	sdp_session_t *sess;
-		
+	void *parsed = NULL;
+	
 	memset(&rep->record, 0, sizeof(sdp_record_t));
-	if(rep->build_record(&rep->record))
+	
+	if(rep->parse_args && rep->parse_args(args,&parsed)) {
+		error("Record parse error.");
 		return -1;
-
+	}	
+	if(rep->build_record(&rep->record, parsed)) {
+		error("Record build error.");
+		return -1;
+	}
 	sess = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, SDP_RETRY_IF_BUSY);
 	if(!sess) {
 		error( "No local sdp server!\n");
@@ -90,8 +97,9 @@ int remove_sdp_record(int handle)
 	return 0;
 }
 
+/* ------------- HID Mouse Record ------------- */
 
-int build_hid_mouse(sdp_record_t *record)
+int build_hid_mouse(sdp_record_t *record, void *parsed)
 {
 
 	sdp_list_t *svclass_id, *pfseq, *apseq, *root;
@@ -240,4 +248,209 @@ int build_hid_mouse(sdp_record_t *record)
 }
 struct sdp_record_builder hid_mouse = {
 	.build_record = build_hid_mouse, 
+};
+
+
+
+/* ------------- HID Multidev (keyboard, mouse, gamepad) Record ------------- */
+
+int build_hid_multidev(sdp_record_t *record, void *parsed)
+{
+
+	sdp_list_t *svclass_id, *pfseq, *apseq, *root;
+	uuid_t root_uuid, hidkb_uuid, l2cap_uuid, hidp_uuid;
+	sdp_profile_desc_t profile[1];
+	sdp_list_t *aproto, *proto[3];
+	sdp_data_t *psm, *lang_lst, *lang_lst2, *hid_spec_lst, *hid_spec_lst2;
+	unsigned int i;
+	uint8_t dtd = SDP_UINT16;
+	uint8_t dtd2 = SDP_UINT8;
+	uint8_t dtd_data = SDP_TEXT_STR8;
+	void *dtds[2];
+	void *values[2];
+	void *dtds2[2];
+	void *values2[2];
+	int leng[2];
+	uint8_t hid_spec_type = 0x22;
+	uint16_t hid_attr_lang[] = { 0x409, 0x100 };
+	static const uint16_t ctrl = 0x11;
+	static const uint16_t intr = 0x13;
+	static const uint16_t hid_attr[] = { 
+		0x100,     // SDP_ATTR_HID_DEVICE_RELEASE_NUMBER		
+		0x111,     // SDP_ATTR_HID_PARSER_VERSION		
+		0x80,      // SDP_ATTR_HID_DEVICE_SUBCLASS	(0x90)
+		0x00,      // SDP_ATTR_HID_COUNTRY_CODE
+		0x01,      // SDP_ATTR_HID_VIRTUAL_CABLE		
+		0x01       // SDP_ATTR_HID_RECONNECT_INITIATE		
+		};
+	static const uint16_t hid_attr2[] = { 
+		0x0,       // SDP_ATTR_HID_SDP_DISABLE
+ 		0x01,      // SDP_ATTR_HID_REMOTE_WAKEUP
+		0x100, 	   // SDP_ATTR_HID_PROFILE_VERSION
+		0x1f40,    // SDP_ATTR_HID_SUPERVISION_TIMEOUT	
+		0x01,  	   // SDP_ATTR_HID_NORMALLY_CONNECTABLE	
+		0x01       // SDP_ATTR_HID_BOOT_DEVICE	
+		};
+	const uint8_t hid_spec[] = {
+		 0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
+    		 0x09, 0x06,                    // USAGE (Keyboard)
+		 0xa1, 0x01,                    // COLLECTION (Application)
+  		 0x85, 0x01,                    //   REPORT_ID (1)
+		 0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
+		 0x19, 0xe0,                    //   USAGE_MINIMUM (Keyboard LeftControl)
+		 0x29, 0xe7,                    //   USAGE_MAXIMUM (Keyboard Right GUI)
+		 0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+		 0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+		 0x75, 0x01,                    //   REPORT_SIZE (1)
+		 0x95, 0x08,                    //   REPORT_COUNT (8)
+		 0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+		 0x95, 0x01,                    //   REPORT_COUNT (1)
+		 0x75, 0x08,                    //   REPORT_SIZE (8)
+    		 0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
+    		 0x95, 0x06,                    //   REPORT_COUNT (6)
+    		 0x75, 0x08,                    //   REPORT_SIZE (8)
+    		 0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+                 0x25, 0x65,                    //   LOGICAL_MAXIMUM (101)
+    		 0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
+   		 0x19, 0x00,                    //   USAGE_MINIMUM (Reserved (no event indicated))
+    		 0x29, 0x65,                    //   USAGE_MAXIMUM (Keyboard Application)
+  		 0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
+  		 0xc0,                          // END_COLLECTION
+  		 
+   		 0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
+  		 0x09, 0x02,                    // USAGE (Mouse)
+  		 0xa1, 0x01,                    // COLLECTION (Application)
+  		 0x09, 0x01,                    //   USAGE (Pointer)
+   		 0xa1, 0x00,                    //   COLLECTION (Physical)
+    		 0x85, 0x02,                    //     REPORT_ID (2)
+   		 0x05, 0x09,                    //     USAGE_PAGE (Button)
+    		 0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
+   		 0x29, 0x03,                    //     USAGE_MAXIMUM (Button 3)
+   		 0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+   		 0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+   		 0x95, 0x03,                    //     REPORT_COUNT (3)
+  		 0x75, 0x01,                    //     REPORT_SIZE (1)
+  		 0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+  		 0x95, 0x01,                    //     REPORT_COUNT (1)
+  		 0x75, 0x05,                    //     REPORT_SIZE (5)
+   		 0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
+   		 0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+   		 0x09, 0x30,                    //     USAGE (X)
+   		 0x09, 0x31,                    //     USAGE (Y)
+  		 0x09, 0x38,                    //     USAGE (Wheel)
+    	 	 0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
+   		 0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
+    		 0x75, 0x08,                    //     REPORT_SIZE (8)
+  		 0x95, 0x03,                    //     REPORT_COUNT (3)
+  		 0x81, 0x06,                    //     INPUT (Data,Var,Rel)
+ 		 0xc0,                          //   END_COLLECTION
+ 		 0xc0,                          // END_COLLECTION
+  		 0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
+  		 0x09, 0x05,                    // USAGE (Game Pad)
+  		 0xa1, 0x01,                    // COLLECTION (Application)
+ 		 0xa1, 0x00,                    //   COLLECTION (Physical)
+  		 0x85, 0x03,                    //     REPORT_ID (3)
+  		 0x05, 0x09,                    //     USAGE_PAGE (Button)
+  		 0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
+  		 0x29, 0x10,                    //     USAGE_MAXIMUM (Button 16)
+  		 0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+  		 0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+   		 0x95, 0x10,                    //     REPORT_COUNT (16)
+   		 0x75, 0x01,                    //     REPORT_SIZE (1)
+  		 0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+  		 0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+  		 0x09, 0x30,                    //     USAGE (X)
+  		 0x09, 0x31,                    //     USAGE (Y)
+  		 0x09, 0x32,                    //     USAGE (Z)
+  		 0x09, 0x33,                    //     USAGE (Rx)
+   		 0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
+   		 0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
+  		 0x75, 0x08,                    //     REPORT_SIZE (8)
+   		 0x95, 0x04,                    //     REPORT_COUNT (4)
+   		 0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+  		 0xc0,                          //   END_COLLECTION
+  		 0xc0,                          // END_COLLECTION   
+		 };
+
+
+	memset(record, 0, sizeof(sdp_record_t));
+	record->handle = 0xffffffff;//si->handle;
+
+	sdp_uuid16_create(&root_uuid, PUBLIC_BROWSE_GROUP);
+	root = sdp_list_append(0, &root_uuid);
+	sdp_set_browse_groups(record, root);
+
+	sdp_add_lang_attr(record);
+
+	sdp_uuid16_create(&hidkb_uuid, HID_SVCLASS_ID);
+	svclass_id = sdp_list_append(0, &hidkb_uuid);
+	sdp_set_service_classes(record, svclass_id);
+
+	sdp_uuid16_create(&profile[0].uuid, HID_PROFILE_ID);
+	profile[0].version = 0x0100;
+	pfseq = sdp_list_append(0, profile);
+	sdp_set_profile_descs(record, pfseq);
+
+	/* protocols */
+	sdp_uuid16_create(&l2cap_uuid, L2CAP_UUID);
+	proto[1] = sdp_list_append(0, &l2cap_uuid);
+	psm = sdp_data_alloc(SDP_UINT16, &ctrl);
+	proto[1] = sdp_list_append(proto[1], psm);
+	apseq = sdp_list_append(0, proto[1]);
+
+	sdp_uuid16_create(&hidp_uuid, HIDP_UUID);
+	proto[2] = sdp_list_append(0, &hidp_uuid);
+	apseq = sdp_list_append(apseq, proto[2]);
+
+	aproto = sdp_list_append(0, apseq);
+	sdp_set_access_protos(record, aproto);
+
+	/* additional protocols */
+	proto[1] = sdp_list_append(0, &l2cap_uuid);
+	psm = sdp_data_alloc(SDP_UINT16, &intr);
+	proto[1] = sdp_list_append(proto[1], psm);
+	apseq = sdp_list_append(0, proto[1]);
+
+	sdp_uuid16_create(&hidp_uuid, HIDP_UUID);
+	proto[2] = sdp_list_append(0, &hidp_uuid);
+	apseq = sdp_list_append(apseq, proto[2]);
+
+	aproto = sdp_list_append(0, apseq);
+	sdp_set_add_access_protos(record, aproto);
+
+	sdp_set_info_attr(record, "HID Mouse", NULL, NULL);
+
+	for (i = 0; i < sizeof(hid_attr) / 2; i++)
+		sdp_attr_add_new(record,
+					SDP_ATTR_HID_DEVICE_RELEASE_NUMBER + i,
+					SDP_UINT16, &hid_attr[i]);
+
+	dtds[0] = &dtd2;
+	values[0] = &hid_spec_type;
+	dtds[1] = &dtd_data;
+	values[1] = (uint8_t *) hid_spec;
+	leng[0] = 0;
+	leng[1] = sizeof(hid_spec);
+	hid_spec_lst = sdp_seq_alloc_with_length(dtds, values, leng, 2);
+	hid_spec_lst2 = sdp_data_alloc(SDP_SEQ8, hid_spec_lst);
+	sdp_attr_add(record, SDP_ATTR_HID_DESCRIPTOR_LIST, hid_spec_lst2);
+
+	for (i = 0; i < sizeof(hid_attr_lang) / 2; i++) {
+		dtds2[i] = &dtd;
+		values2[i] = &hid_attr_lang[i];
+	}
+
+	lang_lst = sdp_seq_alloc(dtds2, values2, sizeof(hid_attr_lang) / 2);
+	lang_lst2 = sdp_data_alloc(SDP_SEQ8, lang_lst);
+	sdp_attr_add(record, SDP_ATTR_HID_LANG_ID_BASE_LIST, lang_lst2);
+
+	sdp_attr_add_new(record, SDP_ATTR_HID_SDP_DISABLE, SDP_UINT16, &hid_attr2[0]);
+
+	for (i = 0; i < sizeof(hid_attr2) / 2 - 1; i++)
+		sdp_attr_add_new(record, SDP_ATTR_HID_REMOTE_WAKEUP + i,
+						SDP_UINT16, &hid_attr2[i + 1]);
+	return 0;
+}
+struct sdp_record_builder hid_multi = {
+	.build_record = build_hid_multidev, 
 };

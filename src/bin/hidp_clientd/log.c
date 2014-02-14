@@ -31,7 +31,7 @@ void push_string(struct log *l, int level, char *s)
 {
 	if(ftell(l->stream) >= l->file_size)	
 		rewind(l->stream);
-	//printf("%s\n", s);
+	printf("%s\n", s);
 	(void) fprintf(l->stream, "[%lu]:%s: %.*s\n", l->counter,GET_LV(level),(int)l->line_size, s);
 	fflush(l->stream);
 	l->counter += 1;
