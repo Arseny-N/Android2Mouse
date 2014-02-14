@@ -1,0 +1,187 @@
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 10 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() 
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() stop_discovery complete
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 10 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() 
+bluetoothd[24158]: plugins/mgmtops.c:start_discovery_complete() hci0 type 1 status 0
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 8 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_discovering() Controller 0 type 1 discovering 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 25 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_device_found() hci0 addr D0:51:62:49:D6:EE, rssi 0 flags 0x0003 eir_len 5
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_confirm_name() hci0 bdaddr D0:51:62:49:D6:EE name_known 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 16 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() 
+bluetoothd[24158]: Unknown command complete for opcode 37
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 8 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_discovering() Controller 0 type 1 discovering 0
+
+=======================================================================================================
+
+
+bluetoothd[24158]: src/adapter.c:adapter_create_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: src/device.c:device_create() Creating device /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: src/device.c:btd_device_ref() 0x7fd0de097f80: ref=1
+bluetoothd[24158]: src/device.c:device_set_temporary() temporary 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_create_bonding() hci0 bdaddr D0:51:62:49:D6:EE io_cap 0x01
+bluetoothd[24158]: src/device.c:bonding_request_new() Requesting bonding for D0:51:62:49:D6:EE
+bluetoothd[24158]: src/device.c:bonding_request_new() Temporary agent registered for D0:51:62:49:D6:EE at :1.162:/
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 31 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_device_connected() hci0 device D0:51:62:49:D6:EE connected eir_len 12
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 14 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_pin_code_request() hci0 D0:51:62:49:D6:EE
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: src/device.c:device_request_authentication() Requesting agent authentication for D0:51:62:49:D6:EE
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_pincode_reply() index 0 addr D0:51:62:49:D6:EE pinlen 4
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 16 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() 
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() pin_code_reply complete
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 32 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_new_link_key() Controller 0 new key of type 0 pin_len 4
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: src/event.c:btd_event_link_key_notify() storing link key of type 0x00
+bluetoothd[24158]: src/device.c:device_set_bonded() bonded 1
+bluetoothd[24158]: src/device.c:device_set_temporary() temporary 0
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: src/device.c:device_bonding_complete() bonding 0x7fd0de09fea0 status 0x00
+bluetoothd[24158]: src/device.c:device_bonding_complete() Proceeding with service discovery
+bluetoothd[24158]: src/device.c:btd_device_ref() 0x7fd0de097f80: ref=2
+bluetoothd[24158]: src/agent.c:agent_release() Releasing agent :1.162, /
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 16 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_cmd_complete() 
+bluetoothd[24158]: plugins/mgmtops.c:pair_device_complete() hci0 D0:51:62:49:D6:EE pairing complete status 0
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: src/device.c:device_bonding_complete() bonding (nil) status 0x00
+bluetoothd[24158]: src/device.c:device_probe_drivers() Probing drivers for D0:51:62:49:D6:EE
+bluetoothd[24158]: network/manager.c:network_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: src/device.c:btd_device_ref() 0x7fd0de097f80: ref=3
+bluetoothd[24158]: network/connection.c:create_peer() Registered interface org.bluez.Network on path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: serial/manager.c:serial_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE: 00001112-0000-1000-8000-00805f9b34fb
+bluetoothd[24158]: serial/port.c:create_serial_device() Registered interface org.bluez.Serial on path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: serial/manager.c:serial_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE: 00001105-0000-1000-8000-00805f9b34fb
+bluetoothd[24158]: serial/manager.c:serial_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE: 0000111f-0000-1000-8000-00805f9b34fb
+bluetoothd[24158]: serial/manager.c:serial_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE: 0000112f-0000-1000-8000-00805f9b34fb
+bluetoothd[24158]: serial/manager.c:serial_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE: 8e780202-0000-1000-8000-00805f9b34fb
+bluetoothd[24158]: input/manager.c:hid_device_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: src/device.c:btd_device_ref() 0x7fd0de097f80: ref=4
+bluetoothd[24158]: input/device.c:input_device_new() Registered interface org.bluez.Input on path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: input/manager.c:headset_probe() path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: input-headset driver probe failed for device D0:51:62:49:D6:EE
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: src/device.c:btd_device_ref() 0x7fd0de097f80: ref=5
+bluetoothd[24158]: audio/device.c:audio_device_register() Registered interface org.bluez.Audio on path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: audio/manager.c:handle_uuid() server not enabled for 00001112-0000-1000-8000-00805f9b34fb (0x1112)
+bluetoothd[24158]: audio/manager.c:handle_uuid() Found Handsfree AG record
+bluetoothd[24158]: audio/manager.c:handle_uuid() Found Audio Source
+bluetoothd[24158]: audio/source.c:source_init() Registered interface org.bluez.AudioSource on path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: audio/manager.c:handle_uuid() Found AV Target
+bluetoothd[24158]: audio/control.c:control_init() Registered interface org.bluez.Control on path /org/bluez/24158/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[24158]: audio/manager.c:handle_uuid() Found AV Remote
+bluetoothd[24158]: src/device.c:btd_device_unref() 0x7fd0de097f80: ref=4
+bluetoothd[24158]: src/device.c:btd_device_ref() 0x7fd0de097f80: ref=5
+bluetoothd[24158]: src/device.c:search_cb() D0:51:62:49:D6:EE: No service update
+bluetoothd[24158]: src/device.c:btd_device_unref() 0x7fd0de097f80: ref=4
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 14 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_device_disconnected() hci0 device D0:51:62:49:D6:EE disconnected
+bluetoothd[24158]: src/event.c:btd_event_disconn_complete() 
+bluetoothd[24158]: src/adapter.c:adapter_remove_connection() 
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 31 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_device_connected() hci0 device D0:51:62:49:D6:EE connected eir_len 12
+bluetoothd[24158]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[24158]: input/device.c:ctrl_watch_cb() Device D0:51:62:49:D6:EE disconnected
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_event() Received 14 bytes from management socket
+bluetoothd[24158]: plugins/mgmtops.c:mgmt_device_disconnected() hci0 device D0:51:62:49:D6:EE disconnected
+bluetoothd[24158]: src/event.c:btd_event_disconn_complete() 
+bluetoothd[24158]: src/adapter.c:adapter_remove_connection() 
+
+==================================================================================
+
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() Received 31 bytes from management socket
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_device_connected() hci0 device D0:51:62:49:D6:EE connected eir_len 12
+bluetoothd[8858]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: src/adapter.c:adapter_create_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: src/device.c:device_create() Creating device /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: src/device.c:btd_device_ref() 0x7ffba3e49270: ref=1
+bluetoothd[8858]: src/device.c:device_set_temporary() temporary 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() Received 18 bytes from management socket
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_user_confirm_request() hci0 D0:51:62:49:D6:EE confirm_hint 0
+
+bluetoothd[8858]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: src/device.c:device_request_authentication() Requesting agent authentication for D0:51:62:49:D6:EE
+bluetoothd[8858]: src/agent.c:agent_request_confirmation() Calling Agent.RequestConfirmation: name=:1.46, path=/org/blueman/agent/adapter/hci0, passkey=422016
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_confirm_reply() index 0 addr D0:51:62:49:D6:EE success 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() Received 16 bytes from management socket
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_cmd_complete() 
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_cmd_complete() user_confirm_reply complete
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() Received 32 bytes from management socket
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_new_link_key() Controller 0 new key of type 5 pin_len 0
+
+bluetoothd[8858]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: src/event.c:btd_event_link_key_notify() storing link key of type 0x05
+bluetoothd[8858]: src/device.c:device_set_bonded() bonded 1
+bluetoothd[8858]: src/device.c:device_set_temporary() temporary 0
+bluetoothd[8858]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: src/device.c:device_bonding_complete() bonding (nil) status 0x00
+bluetoothd[8858]: src/device.c:device_bonding_complete() setting timer for reverse service discovery
+bluetoothd[8858]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: src/device.c:btd_device_ref() 0x7ffba3e49270: ref=2
+bluetoothd[8858]: audio/device.c:audio_device_register() Registered interface org.bluez.Audio on path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: src/device.c:device_probe_drivers() Probing drivers for D0:51:62:49:D6:EE
+bluetoothd[8858]: audio/manager.c:handle_uuid() Found Handsfree AG record
+bluetoothd[8858]: src/agent.c:agent_authorize() authorize request was sent for /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: src/device.c:btd_device_ref() 0x7ffba3e49270: ref=3
+bluetoothd[8858]: src/device.c:device_probe_drivers() Probing drivers for D0:51:62:49:D6:EE
+bluetoothd[8858]: network/manager.c:network_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: src/device.c:btd_device_ref() 0x7ffba3e49270: ref=4
+bluetoothd[8858]: network/connection.c:create_peer() Registered interface org.bluez.Network on path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: serial/manager.c:serial_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE: 00001112-0000-1000-8000-00805f9b34fb
+bluetoothd[8858]: serial/port.c:create_serial_device() Registered interface org.bluez.Serial on path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: serial/manager.c:serial_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE: 00001105-0000-1000-8000-00805f9b34fb
+bluetoothd[8858]: serial/manager.c:serial_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE: 0000112f-0000-1000-8000-00805f9b34fb
+bluetoothd[8858]: serial/manager.c:serial_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE: 8e780202-0000-1000-8000-00805f9b34fb
+bluetoothd[8858]: input/manager.c:hid_device_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: src/device.c:btd_device_ref() 0x7ffba3e49270: ref=5
+bluetoothd[8858]: input/device.c:input_device_new() Registered interface org.bluez.Input on path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: input/manager.c:headset_probe() path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: input-headset driver probe failed for device D0:51:62:49:D6:EE
+bluetoothd[8858]: audio/manager.c:handle_uuid() server not enabled for 00001112-0000-1000-8000-00805f9b34fb (0x1112)
+bluetoothd[8858]: audio/manager.c:handle_uuid() Found Audio Source
+bluetoothd[8858]: audio/source.c:source_init() Registered interface org.bluez.AudioSource on path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: audio/manager.c:handle_uuid() Found AV Target
+bluetoothd[8858]: audio/control.c:control_init() Registered interface org.bluez.Control on path /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: audio/manager.c:handle_uuid() Found AV Remote
+bluetoothd[8858]: src/device.c:btd_device_unref() 0x7ffba3e49270: ref=4
+bluetoothd[8858]: audio/manager.c:gateway_auth_cb() Accepted AG connection from D0:51:62:49:D6:EE for /org/bluez/8858/hci0/dev_D0_51_62_49_D6_EE
+bluetoothd[8858]: Handsfree Agent not registered
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() Received 14 bytes from management socket
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_device_disconnected() hci0 device D0:51:62:49:D6:EE disconnected
+bluetoothd[8858]: src/event.c:btd_event_disconn_complete() 
+bluetoothd[8858]: src/adapter.c:adapter_remove_connection() 
+
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() cond 1
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_event() Received 31 bytes from management socket
+bluetoothd[8858]: plugins/mgmtops.c:mgmt_device_connected() hci0 device D0:51:62:49:D6:EE connected eir_len 12
+bluetoothd[8858]: src/adapter.c:adapter_get_device() D0:51:62:49:D6:EE
+bluetoothd[8858]: input/server.c:connect_event_cb() Incoming connection from D0:51:62:49:D6:EE on PSM 17
+bluetoothd[8858]: input/server.c:connect_event_cb() Incoming connection from D0:51:62:49:D6:EE on PSM 19
+
+

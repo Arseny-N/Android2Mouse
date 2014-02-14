@@ -1,0 +1,214 @@
+[0]:DBG: main:reading connection header
+[1]:DBG: init_conn:addr:00:15:83:3D:0A:57
+[2]:INF: init_conn:Starting with multi conn type.
+[3]:INF: main:Start
+[4]:INF: l2cap_connect:Connection enstablished.
+
+[5]:INF: l2cap_connect:Connection enstablished.
+
+[6]:INF: print_sockopts:INT:
+[7]:INF: print_sockopts:	IMTU(672) OMTU(672)
+[8]:INF: print_sockopts:CNT:
+[9]:INF: print_sockopts:	IMTU(672) OMTU(672)
+[10]:INF: main:cnt_sock(5),int_sock(6),src_fd(4)
+[11]:INF: main:Started polling.
+
+[12]:INF: main:========================> POLLIN:2
+[13]:DBG: process_multi:Hello
+[14]:DBG: process_multi:processing mouse (22, 22, 0x16, 21)
+[15]:DBG: process_multi: 20 20 22 21
+
+[16]:INF: send_hidp_pkt:Sk: 6 Pkt: (05) (cache=16,data=0x422298)
+[17]:DBG: send_hidp_pkt:sent=6
+[18]:INF: main:POLL-OK
+
+[19]:INF: main:========================> POLLIN:1
+[20]:INF: peek_hidp_hdr:Peeking hdr sk=6
+[21]:INF: process_sk:Got pkt (a2)
+[22]:DBG: process_sk:processing pkt with method
+[23]:INF: pkt_drop:Dropping: (a2)
+[24]:INF: drop_hidp_pkt:Reciving pkt on 6, size=1, falgs=0
+[25]:INF: main:POLL-OK
+
+[26]:INF: main:========================> POLLIN:1
+[27]:INF: peek_hidp_hdr:Peeking hdr sk=6
+[28]:INF: process_sk:Got pkt (a2)
+[29]:DBG: process_sk:processing pkt with method
+[30]:INF: pkt_drop:Dropping: (a2)
+[31]:INF: drop_hidp_pkt:Reciving pkt on 6, size=1, falgs=0
+[32]:INF: main:POLL-OK
+
+[33]:INF: main:========================> POLLIN:1
+[34]:INF: peek_hidp_hdr:Peeking hdr sk=6
+[35]:INF: process_sk:Got pkt (a2)
+[36]:DBG: process_sk:processing pkt with method
+[37]:INF: pkt_drop:Dropping: (a2)
+[38]:INF: drop_hidp_pkt:Reciving pkt on 6, size=1, falgs=0
+[39]:INF: main:POLL-OK
+
+[40]:INF: main:========================> POLLIN:2
+[41]:DBG: process_multi:Hello
+[42]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[43]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[44]:DBG: send_hidp_pkt:sent=10
+[45]:INF: main:POLL-OK
+
+[46]:INF: main:========================> POLLIN:2
+[47]:DBG: process_multi:Hello
+[48]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[49]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[50]:DBG: send_hidp_pkt:sent=10
+[51]:INF: main:POLL-OK
+
+[52]:INF: main:========================> POLLIN:2
+[53]:DBG: process_multi:Hello
+[54]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[55]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[56]:DBG: send_hidp_pkt:sent=10
+[57]:INF: main:POLL-OK
+
+[58]:INF: main:========================> POLLIN:2
+[59]:DBG: process_multi:Hello
+[60]:DBG: process_multi:processing keyboard (0, 0)
+[61]:INF: main:POLL-OK
+
+[62]:INF: main:========================> POLLIN:2
+[63]:DBG: process_multi:Hello
+[64]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[65]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[66]:DBG: send_hidp_pkt:sent=10
+[67]:INF: main:POLL-OK
+
+[68]:INF: main:========================> POLLIN:2
+[69]:DBG: process_multi:Hello
+[70]:DBG: process_multi:processing mouse (22, 22, 0x16, 21)
+[71]:DBG: process_multi: 20 20 22 21
+
+[72]:INF: send_hidp_pkt:Sk: 6 Pkt: (05) (cache=16,data=0x422298)
+[73]:DBG: send_hidp_pkt:sent=6
+[74]:INF: main:POLL-OK
+
+[75]:INF: main:========================> POLLIN:2
+[76]:DBG: process_multi:Hello
+[77]:DBG: process_multi:processing mouse (22, 22, 0x16, 21)
+[78]:DBG: process_multi: 20 20 22 21
+
+[79]:INF: send_hidp_pkt:Sk: 6 Pkt: (05) (cache=16,data=0x422298)
+[80]:DBG: send_hidp_pkt:sent=6
+[81]:INF: main:POLL-OK
+
+[82]:INF: main:========================> POLLIN:2
+[83]:DBG: process_multi:Hello
+[84]:DBG: process_multi:processing mouse (22, 22, 0x0, 0)
+[85]:DBG: process_multi: 0 0 0 0
+
+[86]:INF: send_hidp_pkt:Sk: 6 Pkt: (05) (cache=16,data=0x422298)
+[87]:DBG: send_hidp_pkt:sent=6
+[88]:INF: main:POLL-OK
+
+[89]:INF: main:========================> POLLIN:2
+[90]:DBG: process_multi:Hello
+[91]:DBG: process_multi:processing keyboard (0, 0)
+[92]:INF: main:POLL-OK
+
+[93]:INF: main:========================> POLLIN:2
+[94]:DBG: process_multi:Hello
+[95]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[96]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[97]:DBG: send_hidp_pkt:sent=10
+[98]:INF: main:POLL-OK
+
+[99]:INF: main:========================> POLLIN:2
+[100]:DBG: process_multi:Hello
+[101]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[102]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[103]:DBG: send_hidp_pkt:sent=10
+[104]:INF: main:POLL-OK
+
+[105]:INF: main:========================> POLLIN:2
+[106]:DBG: process_multi:Hello
+[107]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[108]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[109]:DBG: send_hidp_pkt:sent=10
+[110]:INF: main:POLL-OK
+
+[111]:INF: main:========================> POLLIN:2
+[112]:DBG: process_multi:Hello
+[113]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[114]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[115]:DBG: send_hidp_pkt:sent=10
+[116]:INF: main:POLL-OK
+
+[117]:INF: main:========================> POLLIN:2
+[118]:DBG: process_multi:Hello
+[119]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[120]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[121]:DBG: send_hidp_pkt:sent=10
+[122]:INF: main:POLL-OK
+
+[123]:INF: main:========================> POLLIN:2
+[124]:DBG: process_multi:Hello
+[125]:DBG: process_multi:processing keycodes (0x1 .... 0x5)
+[126]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[127]:DBG: send_hidp_pkt:sent=10
+[128]:INF: main:POLL-OK
+
+[129]:INF: main:========================> POLLIN:2
+[130]:DBG: process_multi:Hello
+[131]:DBG: process_multi:processing keyboard (0, 2)
+[132]:INF: main:POLL-OK
+
+[133]:INF: main:========================> POLLIN:2
+[134]:DBG: process_multi:Hello
+[135]:DBG: process_multi:processing keycodes (0x1 .... 0x5)
+[136]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[137]:DBG: send_hidp_pkt:sent=10
+[138]:INF: main:POLL-OK
+
+[139]:INF: main:========================> POLLIN:2
+[140]:DBG: process_multi:Hello
+[141]:DBG: process_multi:processing keyboard (0, 0)
+[142]:INF: main:POLL-OK
+
+[143]:INF: main:========================> POLLIN:2
+[144]:DBG: process_multi:Hello
+[145]:DBG: process_multi:processing keycodes (0x4 .... 0x0)
+[146]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[147]:DBG: send_hidp_pkt:sent=10
+[148]:INF: main:POLL-OK
+
+[149]:INF: main:========================> POLLIN:2
+[150]:DBG: process_multi:Hello
+[151]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[152]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[153]:DBG: send_hidp_pkt:sent=10
+[154]:INF: main:POLL-OK
+
+[155]:INF: main:========================> POLLIN:2
+[156]:DBG: process_multi:Hello
+[157]:DBG: process_multi:processing keycodes (0x4 .... 0x0)
+[158]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[159]:DBG: send_hidp_pkt:sent=10
+[160]:INF: main:POLL-OK
+
+[161]:INF: main:========================> POLLIN:2
+[162]:DBG: process_multi:Hello
+[163]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[164]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[165]:DBG: send_hidp_pkt:sent=10
+[166]:INF: main:POLL-OK
+
+[167]:INF: main:========================> POLLIN:2
+[168]:DBG: process_multi:Hello
+[169]:DBG: process_multi:processing keycodes (0x5 .... 0x0)
+[170]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[171]:DBG: send_hidp_pkt:sent=10
+[172]:INF: main:POLL-OK
+
+[173]:INF: main:========================> POLLIN:2
+[174]:DBG: process_multi:Hello
+[175]:DBG: process_multi:processing keycodes (0x0 .... 0x0)
+[176]:INF: send_hidp_pkt:Sk: 6 Pkt: (09) (cache=16,data=0x422298)
+[177]:DBG: send_hidp_pkt:sent=10
+[178]:INF: main:POLL-OK
+

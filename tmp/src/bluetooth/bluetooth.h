@@ -1,0 +1,1 @@
+/home/arseni/workspace/GestureDetector/jni/bluetooth.h
