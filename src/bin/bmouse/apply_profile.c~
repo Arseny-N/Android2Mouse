@@ -13,6 +13,7 @@ usage:
 	}
 		
 	if(strcmp(argv[1], "cod") == 0) {
+print_cod:	
 		uint32_t cod;
 		if(get_dev_class(&cod)) {
 			error("Failed to get device class");
@@ -21,7 +22,13 @@ usage:
 		printf("0x%x\n", cod);		
 		exit(EXIT_SUCCESS);
 	}
-	
+	if(strcmp(argv[1], "cod-mouse") == 0) {
+		if(set_dev_class(DC_MOUSE)) {
+			error("failed to set dev class");
+			exit(EXIT_FAILURE);
+		}
+		goto print_cod;
+	}
 	if(strcmp(argv[1], "mouse") == 0) {
 		int handle;
 		if(add_sdp_record(&hid_mouse, NULL, &handle)) {
@@ -40,7 +47,7 @@ usage:
 			error("failed to apply repr");
 			exit(EXIT_FAILURE);
 		}
-		if(set_dev_class(DC_MULTI)){
+		if(set_dev_class(DC_MOUSE)){
 			error("failed to set dev class");
 			exit(EXIT_FAILURE);
 		}
