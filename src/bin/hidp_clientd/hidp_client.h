@@ -19,8 +19,8 @@ struct connection_header {
 #define SHUTDOWN 1
 extern int int_sock, cnt_sock, src_fd;
 extern bdaddr_t daddr, laddr;
-//#define FIFO_PATH "/data/hidp_clientd.fifo"
-#define FIFO_PATH "fifo.mouse"
+#define FIFO_PATH "/data/hidp_clientd.fifo"
+//#define FIFO_PATH "fifo.mouse"
 #define FIFO_MODE 0777
 
 struct conn_info {

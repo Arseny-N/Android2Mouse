@@ -50,7 +50,7 @@ SIZE_CHECK(gamepad_report, 9)
 extern struct conn_info conn_multi_char;
 extern struct conn_info conn_multi_bin;
 
-/*---------  process_multi_bin ---------------*/
+/*---------  process_multi_bin stuff ---------------*/
 #define MAX_STRING 16
 
 struct bin_mouse {
