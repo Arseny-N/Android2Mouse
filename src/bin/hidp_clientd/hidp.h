@@ -55,14 +55,14 @@ struct send_cache {
 	u8 *buf, *p;
 	size_t size;
 };
-extern struct send_cache common_cache;
+extern struct send_cache common_cache, drop_cache;
 extern int start_cache(struct send_cache *cache, size_t size);
 /* -------- Packet handeling ----------- */
 extern int pkt_drop(u8 hdr, int sk);
 extern int process_hdr_dull(u8 hdr, int sk);
 extern int send_hidp_report(u8 type, u8 *data, int size, int flags);
 extern int send_einval(int sk, int flags);
-extern int drop_hidp_pkt(int sk, int size, int flags);
+extern int drop_hidp_pkt(int sk, int size, int flags,struct send_cache *cache);
 extern int recv_hidp_pkt(int sk, u8 *data, int size, int flags);
 extern int send_hidp_pkt(int sk, u8 hdr, u8 *data, int size, int flags, struct send_cache *cache);
 extern int peek_hidp_hdr(int sk, u8 *hdr);

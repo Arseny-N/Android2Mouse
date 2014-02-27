@@ -2,25 +2,16 @@
 #include "types.h"
 
 
-struct hcr_mouse_report {
-	int x, y, b;
-	int flags; /* Shutdown */
-};
-
-struct connection_header {
-	char addr[24];
-//	int profile;
-};
-
-//#define PROFILE_MOUSE 	01
-
 
 #define HCR_SHUTDOWN 	01
-#define SHUTDOWN 1
+
+#define METHOD_SHUTDOWN 	0x44
+#define METHOD_SUCCESS 		0
+#define METHOD_ERROR 		1
 extern int int_sock, cnt_sock, src_fd;
 extern bdaddr_t daddr, laddr;
-//#define FIFO_PATH "/data/hidp_clientd.fifo"
-#define FIFO_PATH "fifo.mouse"
+#define FIFO_PATH "/data/hidp_clientd.fifo"
+//#define FIFO_PATH "fifo.mouse"
 #define FIFO_MODE 0777
 
 struct conn_info {

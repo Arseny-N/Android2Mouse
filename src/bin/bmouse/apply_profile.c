@@ -8,7 +8,7 @@ int main ( int argc, char * argv [] )
 {
 	if(!argv[1]) {
 usage:
-		fprintf(stderr, "Usage: %s cod|mouse|phone sdp-handle-to-remove\n", argv[0]);
+		fprintf(stderr, "Usage: %s cod|multi|mouse|phone sdp-handle-to-remove\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 		

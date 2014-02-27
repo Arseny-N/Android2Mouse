@@ -23,7 +23,7 @@
 
 /* -------- Lightweight cache ----------- */
 
-struct send_cache common_cache;
+struct send_cache common_cache, drop_cache;
 static void inline zero_cache(struct send_cache *c)
 {
 	memset(c->buf, 0, c->size);
@@ -140,11 +140,12 @@ int send_hidp_pkt(int sk, u8 hdr, u8 *data, int size, int flags, struct send_cac
 	ssize_t sent;
 	info("Sk: %d Pkt: (%.2d) (cache=%d) ", sk ,size, cache->size);
 	int i;
-	printf("data: [");
+	
+	/*printf("data: [");
 	for(i=0; i<size; ++i){
 		printf(" 0x%x,", data[i]);
 	}
-	printf("]\n");
+	printf("]\n");*/
 	check_cache(cache, size+1);
 	
 	zero_cache(cache);
@@ -162,20 +163,18 @@ int recv_hidp_pkt(int sk, u8 *data, int size, int flags)
 {
 	return recv(sk, data, size, flags);
 }
-int drop_hidp_pkt(int sk, int size, int flags)
+int drop_hidp_pkt(int sk, int size, int flags, struct send_cache *cache)
 {
-	void *buf = malloc(size);
+	check_cache(cache, size+1);
 	int rv;
-	if(!buf)
-		return -1;
-	rv = recv_hidp_pkt(sk, buf, size, flags);
+
+	rv = recv_hidp_pkt(sk, get_cache(cache), size, flags);
 /*	int i;
 	info("Dropping this ----------V");
 	for(i=0; i<size; ++i){
 		printf(" 0x%x", ((u8*) buf)[i]);
 	}
 	*/
-	free(buf);
 	info("Reciving pkt on %d, size=%d, falgs=%d", sk, size, flags);
 	return rv;
 }
@@ -198,7 +197,7 @@ int process_hdr_dull(u8 hdr, int sk)
 int pkt_drop(u8 hdr, int sk)
 {
 	info("Dropping: (%x)", hdr);
-	return drop_hidp_pkt(sk, 1, 0);
+	return drop_hidp_pkt(sk, 1, 0, &drop_cache) == -1 ? METHOD_ERROR : METHOD_SUCCESS;
 }
 struct hdr_lookup_funcs hdr_lookup_dropall[] = {
 	{ pkt_drop }, /* 0 */

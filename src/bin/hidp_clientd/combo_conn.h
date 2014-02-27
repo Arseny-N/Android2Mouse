@@ -64,9 +64,13 @@ struct bin_keyboard {
 	uint8_t modifier;
 	uint8_t keycodes[6];
 };
-
+/* p.flags Bits */
 #define BRPT_STRING 1
 #define BRPT_CHAR 2
+/* p.flags2 Bits for BRPT_CHAR */
+#	define CHAR_ASCII 1
+#	define CHAR_RAW   2
+
 
 struct bin_string {
 	char s[MAX_STRING];
@@ -90,6 +94,7 @@ struct bin_gamepad {
 struct bin_packet {
 	uint8_t report_id;
 	uint8_t flags;
+	uint8_t flags2;
 	union {
 		struct bin_mouse       mouse;
 		struct bin_keyboard keyboard; 	

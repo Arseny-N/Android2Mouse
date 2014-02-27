@@ -4,8 +4,8 @@ ADB ?= adb
 MAKE ?= make
 CFALGS ?= -Wall
 ANT_MODE ?= debug
-#CC = arm-linux-gnueabi-gcc
-CC = gcc
+CC=arm-linux-gnueabi-gcc
+#CC = gcc
 install: InstallGui InstallBin
 build:  BuildBin BuildGui
 test: testSu testElf
@@ -17,8 +17,11 @@ testSu:
 testElf: InstallBin
 	$(ADB) shell su -c /data/bmouse cod
 BuildBin:
-	cd ./src/bin/bmouse; $(MAKE) CC=$(CC) CFALGS=$(CFLAGS); #cp bmouse ../../../build 
-	cd ./src/bin/hidp_clientd; $(MAKE) CC=$(CC) CFALGS=$(CFLAGS); #cp hidp_clientd ../../../build
+	cd ./src/bin/bmouse; $(MAKE) CC=$(CC) CFALGS=$(CFLAGS); cp bmouse ../../../build 
+	cd ./src/bin/hidp_clientd; $(MAKE) CC=$(CC) CFALGS=$(CFLAGS); cp hidp_clientd ../../../build; cp bin_sender ../../../build
+BuildBin-local:
+	cd ./src/bin/bmouse; $(MAKE) CC=gcc CFALGS=$(CFLAGS); 
+	cd ./src/bin/hidp_clientd; $(MAKE) CC=gcc CFALGS=$(CFLAGS); 
 BuildGui:
 	cd ./src/becomeAMouse; $(ANT) $(ANT_MODE); cd jni; ndk-build; cd ..; cp ./bin/becomeAMouse.apk ../../build;
 	cd ./src/BluetoothMouse; $(ANT) $(ANT_MODE);cd jni; ndk-build; cd ..; cp ./bin/BluetoothMouse.apk ../../build;
@@ -30,6 +33,8 @@ InstallBin:
 	$(ADB) shell su -c 'cat /sdcard/bmouse > /data/bmouse; chmod 0777 /data/bmouse; chown root /data/bmouse'
 	$(ADB) push build/hidp_clientd /sdcard/hidp_clientd; \
 	$(ADB) shell su -c 'cat /sdcard/hidp_clientd > /data/hidp_clientd; chmod 0777 /data/hidp_clientd; chown root /data/hidp_clientd'
+	$(ADB) push build/bin_sender /sdcard/bin_sender; \
+	$(ADB) shell su -c 'cat /sdcard/bin_sender > /data/bin_sender; chmod 0777 /data/bin_sender; chown root /data/bin_sender'
 
 
 	

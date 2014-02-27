@@ -34,8 +34,8 @@ extern "C" {
 #include <stdint.h>
 #include "bluetooth.h"
 
-//#define SDP_UNIX_PATH "/dev/socket/bluetooth"
-#define SDP_UNIX_PATH "/var/run/sdp"
+#define SDP_UNIX_PATH "/dev/socket/bluetooth"
+//#define SDP_UNIX_PATH "/var/run/sdp"
 #define SDP_RESPONSE_TIMEOUT	20
 #define SDP_REQ_BUFFER_SIZE	2048
 #define SDP_RSP_BUFFER_SIZE	65535

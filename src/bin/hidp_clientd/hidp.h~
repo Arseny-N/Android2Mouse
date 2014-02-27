@@ -55,8 +55,8 @@ struct send_cache {
 	u8 *buf, *p;
 	size_t size;
 };
-extern struct send_cache common_cache;
-extern int start_cache(struct send_cache *cache, size_t size)
+extern struct send_cache common_cache, drop_cache;
+extern int start_cache(struct send_cache *cache, size_t size);
 /* -------- Packet handeling ----------- */
 extern int pkt_drop(u8 hdr, int sk);
 extern int process_hdr_dull(u8 hdr, int sk);

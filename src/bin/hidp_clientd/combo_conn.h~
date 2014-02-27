@@ -50,7 +50,7 @@ SIZE_CHECK(gamepad_report, 9)
 extern struct conn_info conn_multi_char;
 extern struct conn_info conn_multi_bin;
 
-/*---------  process_multi_bin ---------------*/
+/*---------  process_multi_bin stuff ---------------*/
 #define MAX_STRING 16
 
 struct bin_mouse {
@@ -67,6 +67,9 @@ struct bin_keyboard {
 
 #define BRPT_STRING 1
 #define BRPT_CHAR 2
+#	define CHAR_ASCII 1
+#	define CHAR_RAW   2
+
 
 struct bin_string {
 	char s[MAX_STRING];
@@ -90,6 +93,7 @@ struct bin_gamepad {
 struct bin_packet {
 	uint8_t report_id;
 	uint8_t flags;
+	uint8_t flags2;
 	union {
 		struct bin_mouse       mouse;
 		struct bin_keyboard keyboard; 	

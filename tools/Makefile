@@ -7,8 +7,9 @@ syncBuild:
 	guestunmount $(MNT)
 	
 syncSource:
-	guestmount -a $(HOME)/Documents/vm/images/ubuntu.qcow -i $(MNT)
+	guestmount -v -a $(HOME)/Documents/vm/images/ubuntu.qcow -i $(MNT)
 	rsync -av $(HOME)/Documents/p/blue/src/bin/ $(MNT)/blue/src/bin/
+	rsync -av $(HOME)/Documents/p/blue/Makefile $(MNT)/blue/Makefile
 	guestunmount $(MNT)
 launchVM:
 	qemu-kvm $(HOME)/Documents/vm/images/ubuntu.qcow -boot d -net nic -net user -m 1024 -localtime

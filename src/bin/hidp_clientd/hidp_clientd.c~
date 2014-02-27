@@ -4,7 +4,7 @@
 
 #include "bluetooth.h"
 #include "l2cap.h"
-
+#include <getopt.h>
 #include <linux/input.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -35,24 +35,24 @@ int process_sk(int sk, struct conn_info *info)
 	
 	if(GET_HIDP_TYPE(hdr) <= 0xa && info->hdr_lookup[GET_HIDP_TYPE(hdr)].process) {
 		dbg("processing pkt with method");
-		info->hdr_lookup[GET_HIDP_TYPE(hdr)].process(hdr, sk);
+		return info->hdr_lookup[GET_HIDP_TYPE(hdr)].process(hdr, sk);
 	} else {
 		dbg("no method, dropping pkt, sending einval");
 		int len = recv_hidp_pkt(sk, &hdr, 1, 0);
 		if(len == -1) {
 			error("errno=%d",errno);
 			error("recv");
-			return -1;
+			return METHOD_ERROR;
 		}
 			
 		if(send_einval(sk, 0) == -1) {
 			error("errno=%d",errno);
 			error("send");
-			return -1;
+			return METHOD_ERROR;
 		}
 			
 	}
-	return 0;
+	return	METHOD_SUCCESS ;
 		
 
 }
@@ -69,6 +69,7 @@ static int send_mouse_rep(u8 b, u8 x, u8 y, u8 w)
 }
 int process_mouse(int fd, struct conn_info *info) 
 {
+/*
 	struct hcr_mouse_report m;
 	
 	while(read(fd, &m, sizeof(m)) == sizeof(m)) {
@@ -83,6 +84,7 @@ int process_mouse(int fd, struct conn_info *info)
 		}
 	
 	}
+*/
 	return 0;
 }
 int process_mouse_nice(int fd, struct conn_info *info) 
@@ -106,7 +108,7 @@ int process_mouse_nice(int fd, struct conn_info *info)
         	dbg("Hello");       	
 		if(f & HCR_SHUTDOWN) {
 			dbg("receved SHUTDOWN rq");
-			return SHUTDOWN;
+			return METHOD_SHUTDOWN;
 		}
 		dbg("processing mouse (%d, %d, %x)", x, y, b);
 		if(send_mouse_rep(b, x, y, 0) == -1) {
@@ -129,22 +131,33 @@ static struct {
 	struct conn_info *info;
 } conn_lookup[] = {
 	{ .name = "mouse", .info = &conn_mouse },
-	{ .name = "multi-char", .info = &conn_multi_char }
+	{ .name = "multi-char", .info = &conn_multi_char },
 	{ .name = "multi", .info = &conn_multi_bin }
 };
 static inline struct conn_info *lookup_conn_type(char *name) 
 {
 #define ARR_SIZE(a) sizeof(a)/sizeof(a[0])
+	struct conn_info *info = NULL;
 	int i;
 	for(i=0; i<ARR_SIZE(conn_lookup); ++i) 
-		if(strcmp(name, conn_lookup[i].name) == 0)
-			return conn_lookup[i].info;
-	return NULL;
+		if(strcmp(name, conn_lookup[i].name) == 0) {
+			info = conn_lookup[i].info;
+			break;
+		}
+	if(!info) {
+		info("No such conn-method: '%s'", name);
+	}else if (!info->process_src) {
+		info("%s conn-method not implemented", name);
+		info("Browse the code and check the defs.");
+	}
+	return info;
 }
 
 struct {
 	char *addr;
 	char *type;
+	char *fifo_file;
+	char *log_file;
 } cmd_line;
 
 int init_conn(struct conn_info **info)
@@ -194,31 +207,60 @@ static int global_sighandler(void (*sighandler)(int , siginfo_t *, void *))
 	return 0;
 }
 
+#define for_each_opt(opt, long, short) while ((opt=getopt_long(argc, argv, short ? short:"+", long, 0)) != -1)
 int main ( int argc, char * argv [] )
 {
 	struct pollfd p_fds[3];
 	struct conn_info *conn_info;
 	int (*process[3]) (int fd, struct conn_info *info);
+	static struct option get_options[] = {
+		{ "help",	0, 0, 'h' },
+		{ "logfile",	1, 0, 'l' },
+		{ "fifo",	1, 0, 'f' },
+		{ "raw",	0, 0, 'r' },
 
+		{ 0, 0, 0, 0 }
+	};
+	int opt;
+	char *progName = argv[0];
+	cmd_line.log_file = "hidp_clientd.log";
+	cmd_line.fifo_file = FIFO_PATH;
+	for_each_opt(opt, get_options, 0) {
+		switch (opt) {
+		case 'l':								
+			cmd_line.log_file = optarg;
+			break;
+		case 'f':
+			cmd_line.fifo_file = optarg;	
+			break;
+//		default:			
+		case 'h':
+
+			goto usage;			
+		}
+	}
+
+	argc -= optind;
+	argv += optind;
 	
-	
-	if(start_log("hidp_clientd.log") == -1) {
+	if(start_log(cmd_line.log_file) == -1) {
+		printf("Failed to start log.");
 		exit(EXIT_FAILURE);
 	}
-	if(!argv[1] || !argv[2]) {
+	if(argc < 2) {
 usage:
-		info("Usage: %s <conn-type> <bluetooth-address>");
+		printf("Usage: %s [ --logfile <log-file|stdout|stderr> ] [ --fifo <fifo-file>] <conn-type> <bluetooth-address>\n",progName);
 		exit(EXIT_FAILURE);		
 	}
-	cmd_line.type = argv[1];
-	cmd_line.addr = argv[2];
-	
-	if(mkfifo(FIFO_PATH, FIFO_MODE) == -1 && errno != EEXIST) {
+	cmd_line.type = argv[0];
+	cmd_line.addr = argv[1];
+	info("fifo: %s conn-type: %s baddr: %s", cmd_line.fifo_file, cmd_line.type, cmd_line.addr);
+	if(mkfifo(cmd_line.fifo_file, FIFO_MODE) == -1 && errno != EEXIST) {
 		error("mkfifo %s %o", FIFO_PATH, FIFO_MODE);
 		exit(EXIT_FAILURE);
 	}
 
-	src_fd = open(FIFO_PATH, O_RDONLY);
+	src_fd = open(cmd_line.fifo_file, O_RDONLY);
 	if(src_fd == -1) {
 		error("open()");
 		exit(EXIT_FAILURE);
@@ -226,7 +268,6 @@ usage:
 	}
 
 	
-	printf("Hello\n");
 	dbg("reading connection header");
 	if(init_conn(&conn_info) == -1 ) {
 		error("Failed to init connection.");
@@ -236,6 +277,10 @@ usage:
 	/* Assign the header somewhere */
 	
 	if(start_cache(&common_cache, 16)) {
+		error("Failed to start_cache(16)");
+		exit(EXIT_FAILURE);
+	}
+	if(start_cache(&drop_cache, 16)) {
 		error("Failed to start_cache(16)");
 		exit(EXIT_FAILURE);
 	}
@@ -289,11 +334,15 @@ usage:
 			if(p_fds[i].revents & POLLIN) {
 				info("========================> POLLIN:%d",i);
 				switch(process[i](p_fds[i].fd, conn_info)) {
-					case SHUTDOWN:
-						info("shutdown");
+					case METHOD_SHUTDOWN:
+						info("---------------->shutdown");
 						exit(EXIT_SUCCESS);
-					case -1:
+					case METHOD_ERROR:
 						error("Error processing fd %d", i);
+						break;
+					case METHOD_SUCCESS:
+						break;
+						
 				}
 				info("POLL-OK\n");
 				p_fds[i].revents = 0;

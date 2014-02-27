@@ -40,6 +40,7 @@ void send_packet(struct bin_packet *p)
 		exit(EXIT_FAILURE);
 	}
 	write(fd, (void*)p, sizeof(*p));
+	info("%d packet(%d) -> %s", sizeof(*p), p->report_id, FIFO_PATH);
 }
 static void send_string_frag(char *s, size_t size)
 {
@@ -67,11 +68,12 @@ int send_str_report(char *s, size_t size)
 int main(int argc, char *argv[])
 {
 	if(start_log("hidp_clientd.log") == -1) {
+		printf("failed to init logs...\n");
 		exit(EXIT_FAILURE);
 	}
 	if(argc < 3) {
 usage:
-		info("Usage: %s rid flgs ....");
+		info("Usage: %s rid flgs ....", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 	int i;
@@ -106,7 +108,7 @@ usage:
 					 p[i] = strtol(argv[4+i] ,NULL, 0);				
 				break;		        	
 			case  MOUSE_REP_ID: /* Mouse */ 
-			        if(argc < 8)
+			        if(argc < 7)
         				goto usage;
         			p = &(packet.report.mouse.buttons);
 				for(i=0; i< 4; i++) 
@@ -120,8 +122,8 @@ usage:
         			break;
 				
         }
- 	//send_packet(&packet);
-
+ 	send_packet(&packet);
+	return 0;
         	
 }
 
