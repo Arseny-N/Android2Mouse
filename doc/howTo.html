@@ -61,12 +61,12 @@
 
 
 	<h1>Android2Mouse</h1>
-	<p><b>This tutorial will explain you how to setup the "Android2Mouse" program set on your android phone and how to use it.</b>
+	<p><b> This tutorial explains how to setup the "Android2Mouse" on your Android phone</b>
 
 	<h2 id="what-you-need">What you will need.</h2>
 	<p>
 		<ul>
-			<li>A rooted phone running android with bluetooth support.</li>
+			<li>A rooted phone running Android with bluetooth support.</li>
 			<li>A PC with bluetooth support (hidp).</li>
 			<li>The "Android2Mouse" package.</li>
 			<li>A usb cable.</li>
@@ -75,8 +75,8 @@
 	</p>
 	<h2 id="how-to-root"> How to root your phone.</h2>
 	<p>
-		A good rooting package (which I use) is <a href="https://play.google.com/store/apps/details?id=eu.chainfire.supersu"> SuperSu</a>, 
-		well it is not completely free but it's "unrated" part is suitable for our purpose, we will not go in further details about rooting here.
+		A good superuser permission manager (which I use) is <a href="https://play.google.com/store/apps/details?id=eu.chainfire.supersu"> SuperSu</a> someone prefers  <a href="https://github.com/koush/Superuser">koush's Superuser</a>. 
+		Well it is not completely free but it's "unrated" part is suitable for our purpose, we will not go in further details about rooting here.
 	</p>
 	<h2 id="how-to-install"> How to install <b>Android2Mouse</b>.</h2>
 	<p>
@@ -103,11 +103,11 @@
 	</p>
 	<h2 id="how-to-run"> How to run the suite.</h2>
 	<p>
-		If everything is fine now you should have now two new apps - "Became A Mouse" and "Bluetooth Mouse".<br>
+		 If everything is fine you should have now two new apps - "Become A Mouse" and "Bluetooth Mouse"<br>
 		To make everything work do the following: 
 		<ul>
-		<li>Switch on the Bluetooth.</li>
-		<li>Run the "became a mouse" app (grant it superuser permissions) push the become a mouse button - now your phone will be seen as a Bluetooth mouse buy all the other devices, you can close the app.
+		<li>Turn on the Bluetooth.</li>
+		<li>Run the "became a mouse" app (grant it superuser permissions) push the "become a mouse button". Now your phone will be seen as a Bluetooth mouse buy all the other devices. You can close the app.
 		</li>
 		<li>
 		Start a search of devices and pair your phone with the target one.<b> Warning, do it from your phone, doing otherwise may result in failures.</b>
@@ -134,8 +134,8 @@
 		<li>Cached Bluetooth credentials.</li>
 		<p>
 			Remove the pair on both devices and pair them again.Before pairing them close the bluetooth applet on the phone and switch the bluetooth on and off on the host machine.
-			
-			Also a reboot of the phone after the dispairing could be sometimes useful.
+
+			Also a reboot of the phone after the dispairing could be useful.
 			
 			In case of *nix a <code>sudo rm -rf /lib/var/bluetooth </code>
 			may help, if you do so you remove all the <code>bluetoothd</code> cache
@@ -143,7 +143,7 @@
 		</p>
 		<li>Not that elf.</li>
 		<p>
-		Run the <code>/data/bmouse</code>.Normally it will output a usage message but if the executable refuses to run giving wired elf errors then out arhces don't match (quite unprababble), try to recompile it, to do this <a href="http://thetechcaptain.blogspot.ru/2012/08/how-to-cross-compile-c-code-for-android.html">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). Add the needed CFLAGS in the Makefile and from the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
+		Run the <code>/data/bmouse</code>. Normally it will output a usage message but if the executable refuses to run giving wired elf errors then out arhces don't match (quite unprababble), try to recompile it, to do this <a href="http://thetechcaptain.blogspot.ru/2012/08/how-to-cross-compile-c-code-for-android.html">install the cross-compiling tool-chain</a> (should be a debian/ubuntu folk, fedora don't support arm-gcc fully, it supports it with no Glibc so it is only useful for compiling kernels). Add the needed CFLAGS in the Makefile and from the root dir of the project run <code>make BuildBin</code> then <code>make InstallBin</code>.
 		</p>
 		<li>If you are hardcore.</li>
 		<p>
@@ -156,18 +156,18 @@
 	</p>
 	<h2 id="how-does-it-work"> How does it work.</h2>
 	<p>
-		If you are even more hardcore and want to figure out how the program accomplish it's task then read below.<br>
+		If you are even more hardcore and want to figure out how the program accomplish it's task then read further.<br>
 		The program could be broken in three main parts: the <code> hidp_clientd</code> or daemon, the <code> bmouse</code> or attribute changer and the gui.
 		<h3>The daemon.</h3>
 		<p>
-			It's main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">hidp spec</a>.However not all the spec is implemented - it drops packets received from the host because I never receved one, so I considered it a waste of time to implement this.Sometimes it bizarrely hangs, so when you quit the giu a <code>pkill hidp_clientd</code> is triggered.
+			Its main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">hidp spec</a>.However not all the spec is implemented - it drops packets received from the host because I never receved one, so I considered it a waste of time to implement this. Sometimes it bizarrely hangs, so when you quit the giu a <code>pkill hidp_clientd</code> is triggered.
 		</p>
 		<h3>The attribute changer.</h3>
-		It's main task is to add an sdp record and change the CoD of the device [<a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">more</a>].
+		Its main task is to add an sdp record and change the CoD of the device [<a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">more</a>].
 		<div class="pointer"><i>The Bluetooth stack is the most undocumented thing I ever come through .So in case you are in the process of figuring out something a good place for doing this is the <code>bluez</code> package, if more precisely the <code>tools/</code> directory. The sdp_lib.h api is well shown in the sdp tool,the hci_lib api in the hcitool and so on.</i></div>
 		<h3>The GUI.</h3>
 		<p>
-		It's main task is to list all the paired devices available on the phone, get the address of the one chosen buy the user, send it to the daemon and interpret gestures via the <a href="https://developer.android.com/reference/android/view/GestureDetector.html">GestueDetector</a> lib sending them to the daemon via a <a href="..">JNI library</a> specially written for this purpose.
+		It's main task is to list all the paired devices available on the phone, get the address of the one chosen by the user, send it to the daemon and interpret gestures via the <a href="https://developer.android.com/reference/android/view/GestureDetector.html">GestueDetector</a> lib sending them to the daemon via a <a href="..">JNI library</a> specially written for this purpose.
 		</p>
 		
 		
