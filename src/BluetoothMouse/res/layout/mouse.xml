@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.example.bluetoothmouse"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        android:inputType="textMultiLine" >
+	
+
+    </EditText>
+
+  
+    <Button
+        android:id="@+id/buttonRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/inputText"
+        android:layout_below="@+id/inputText"
+        android:visibility="gone"
+        android:text="->" />
+
+    <Button
+        android:id="@+id/buttonLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inputText"
+        android:layout_below="@+id/inputText"
+        android:visibility="gone"
+        android:text="&lt;-" />
+
+    <Button
+        android:id="@+id/inputButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputText"
+        android:layout_toLeftOf="@+id/buttonRight"
+        android:layout_toRightOf="@+id/buttonLeft"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:text="Send" />
+
+    <Button
+        android:id="@+id/buttonEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonLeft"
+        android:layout_alignRight="@+id/buttonLeft"
+        android:layout_below="@+id/buttonLeft"
+        android:visibility="gone"
+        android:text="Enter" />
+
+    <Button
+        android:id="@+id/buttonBs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonEnter"
+        android:layout_toLeftOf="@+id/buttonTab"
+        android:layout_toRightOf="@+id/buttonEnter"
+        android:visibility="gone"
+        android:text="Backspace" />
+
+    <Button
+        android:id="@+id/buttonTab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonBs"
+        android:layout_alignBottom="@+id/buttonBs"
+        android:layout_alignLeft="@+id/buttonRight"
+        android:visibility="gone"
+        android:text="Tab" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="180dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:layout_alignParentLeft="true" />
+
+</RelativeLayout>

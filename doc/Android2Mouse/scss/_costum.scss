@@ -1,0 +1,22 @@
+
+ul.my-side-nav {
+	@include side-nav();
+	background:  $my-side-nav-li-color;
+}
+
+.my-side-nav {
+  @include side-nav();
+  li {
+	background:  $my-side-nav-li-color;
+  	height: 100%;
+  	margin: 0px;
+  	padding: 10px 20px;
+  }
+  
+  li:hover {
+  	background: $my-side-nav-li-hover-color;
+  }
+  li.heading:hover {
+  	background: $my-side-nav-li-color;
+  }
+}

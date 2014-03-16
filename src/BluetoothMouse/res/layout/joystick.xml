@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="19dp"
+        android:text="A" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@+id/button1"
+        android:text="B" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="38dp"
+        android:text="C" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignLeft="@+id/button3"
+        android:text="D" />
+
+    <Button
+        android:id="@+id/axis1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="74dp"
+        android:text="^" />
+
+	<Button
+	    android:id="@+id/axis4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/axis1"
+	    android:layout_toLeftOf="@+id/axis1"
+	    android:text="&lt;" />
+
+	<Button
+	    android:id="@+id/axis2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/axis1"
+	    android:layout_below="@+id/axis3"
+	    android:text="V" />
+
+	<Button
+	    android:id="@+id/axis3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/axis4"
+	    android:layout_alignBottom="@+id/axis4"
+	    android:layout_toRightOf="@+id/axis2"
+	    android:text=">" />
+
+	<SeekBar
+	    android:id="@+id/seekBar1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:visibility="gone"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true" />
+    
+</RelativeLayout>
