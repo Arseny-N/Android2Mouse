@@ -9,6 +9,25 @@ package com.example.bluetoothmouse;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>left</code></td><td>0</td><td></td></tr>
+<tr><td><code>right</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int labelPosition=0x7f010001;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int showText=0x7f010000;
     }
     public static final class dimen {
         /** 
@@ -16,34 +35,77 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040002;
-        public static final int margin_huge=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050002;
+        public static final int margin_huge=0x7f050001;
         /**  Define standard dimensions to comply with Holo-style grids and rhythm. 
          */
-        public static final int margin_medium=0x7f040000;
+        public static final int margin_medium=0x7f050000;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int sample_action=0x7f080001;
-        public static final int text1=0x7f080000;
+        public static final int Button01=0x7f04000c;
+        public static final int Button02=0x7f04000e;
+        public static final int Button03=0x7f04000d;
+        public static final int Button04=0x7f04000f;
+        public static final int Button05=0x7f040010;
+        public static final int Button06=0x7f040011;
+        public static final int Button07=0x7f040012;
+        public static final int Button08=0x7f040013;
+        public static final int Button09=0x7f040014;
+        public static final int Button10=0x7f040015;
+        public static final int Button11=0x7f040016;
+        public static final int Button12=0x7f040017;
+        public static final int Button13=0x7f040018;
+        public static final int Button14=0x7f040019;
+        public static final int Button16=0x7f04001b;
+        public static final int Button17=0x7f04001c;
+        public static final int Button18=0x7f04001a;
+        public static final int action_search=0x7f040026;
+        public static final int axis1=0x7f040007;
+        public static final int axis2=0x7f040009;
+        public static final int axis3=0x7f04000a;
+        public static final int axis4=0x7f040008;
+        public static final int button1=0x7f040003;
+        public static final int button2=0x7f040005;
+        public static final int button3=0x7f040004;
+        public static final int button4=0x7f040006;
+        public static final int buttonBs=0x7f040022;
+        public static final int buttonEnter=0x7f04001f;
+        public static final int buttonLeft=0x7f040021;
+        public static final int buttonRight=0x7f04001e;
+        public static final int buttonTab=0x7f040023;
+        public static final int inputButton=0x7f04001d;
+        public static final int inputText=0x7f040020;
+        public static final int left=0x7f040000;
+        public static final int right=0x7f040001;
+        public static final int sample_action=0x7f040025;
+        public static final int seekBar1=0x7f04000b;
+        public static final int text1=0x7f040002;
+        public static final int textView1=0x7f040024;
     }
     public static final class layout {
-        public static final int bcast_gestures=0x7f030000;
-        public static final int device_list=0x7f030001;
-        public static final int device_row=0x7f030002;
-        public static final int notepad_list=0x7f030003;
+        public static final int device_list=0x7f030000;
+        public static final int device_row=0x7f030001;
+        public static final int joystick=0x7f030002;
+        public static final int joystick2=0x7f030003;
+        public static final int joystick3=0x7f030004;
+        public static final int joystick_list=0x7f030005;
+        public static final int keyboard=0x7f030006;
+        public static final int mouse=0x7f030007;
+        public static final int notepad_list=0x7f030008;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int main=0x7f080000;
+        public static final int mouse_actions=0x7f080001;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int clear_text=0x7f050002;
-        public static final int intro_message=0x7f050001;
-        public static final int intro_msg=0x7f050003;
-        public static final int no_devices=0x7f050004;
+        public static final int app_name=0x7f060000;
+        public static final int clear_text=0x7f060002;
+        public static final int intro_message=0x7f060001;
+        public static final int intro_msg=0x7f060003;
+        public static final int no_devices=0x7f060004;
     }
     public static final class style {
         /** 
@@ -58,16 +120,64 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060006;
-        public static final int AppTheme=0x7f060002;
-        public static final int Log=0x7f060005;
+        public static final int AppBaseTheme=0x7f070006;
+        public static final int AppTheme=0x7f070002;
+        public static final int Log=0x7f070005;
         /**  Activity themes 
          */
-        public static final int Theme_Base=0x7f060000;
-        public static final int Theme_Sample=0x7f060001;
+        public static final int Theme_Base=0x7f070000;
+        public static final int Theme_Sample=0x7f070001;
         /**  Widget styling 
          */
-        public static final int Widget=0x7f060003;
-        public static final int Widget_SampleOutput=0x7f060004;
+        public static final int Widget=0x7f070003;
+        public static final int Widget_SampleOutput=0x7f070004;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a KbdListener.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #KbdListener_labelPosition com.example.bluetoothmouse:labelPosition}</code></td><td></td></tr>
+           <tr><td><code>{@link #KbdListener_showText com.example.bluetoothmouse:showText}</code></td><td></td></tr>
+           </table>
+           @see #KbdListener_labelPosition
+           @see #KbdListener_showText
+         */
+        public static final int[] KbdListener = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.example.bluetoothmouse.R.attr#labelPosition}
+          attribute's value can be found in the {@link #KbdListener} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>left</code></td><td>0</td><td></td></tr>
+<tr><td><code>right</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name com.example.bluetoothmouse:labelPosition
+        */
+        public static final int KbdListener_labelPosition = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.example.bluetoothmouse.R.attr#showText}
+          attribute's value can be found in the {@link #KbdListener} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.bluetoothmouse:showText
+        */
+        public static final int KbdListener_showText = 0;
+    };
 }

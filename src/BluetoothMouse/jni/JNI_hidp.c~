@@ -19,6 +19,7 @@
 #define ANDROID_LOG
 #include "log.h"
 
+#include "hidp_client.h"
 
 
   /* 
@@ -54,24 +55,40 @@ JNIEXPORT jboolean JNICALL Java_com_example_common_hidp_HidpBcaster_EndBcast( JN
     	return 0;
 }
 
-#define EV_BTN_LEFT   1
-#define EV_BTN_RIGHT  2
-#define EV_BTN_MIDDLE 3
 
-JNIEXPORT jboolean JNICALL Java_com_example_common_hidp_HidpBcaster_EventBcast( JNIEnv* env, jobject thiz, jint x, jint y, jint b_event, jint b_type)
+JNIEXPORT void JNICALL Java_com_example_common_hidp_HidpBcaster_reportGpad( JNIEnv* env, jobject thiz, 
+			jint x,jint y,jint z,jint rx,jint ry,jint rz,jint buttons)
 {
-	static int b = 0;	
-	dbg("x:%d y:%d, b_event:%d, b_type:%d", x, y, b_event, b_type);
+	dbg("x:%d y:%d z:%d ry:%d rx:%d rz:%d, buttons: 0x%x", x,y,z,rx,ry,rz,buttons);
+	send_gpad_report(x,y,z,rx,ry,rz,buttons);			
+}
+
+JNIEXPORT void JNICALL Java_com_example_common_hidp_HidpBcaster_reportMouse( JNIEnv* env, jobject thiz, 
+			jint x, jint y, jint buttons, jint wheel)
+{
+	dbg("x:%d y:%d, buttons: 0x%x, wheel:%d", x, y, buttons, wheel);
+	send_mouse_report(x,y,buttons,wheel);			
+}
+JNIEXPORT void JNICALL Java_com_example_common_hidp_HidpBcaster_reportRawChar( JNIEnv* env, jobject thiz, 
+			jchar ch, jint mod)
+{
+	dbg("ch:%c, mod: 0x%x", ch, mod);
+ 	send_char_raw_report(ch, mod);
+}
+JNIEXPORT void JNICALL Java_com_example_common_hidp_HidpBcaster_reportAsciiChar( JNIEnv* env, jobject thiz, 
+			jchar ch, jint mod)
+{
+	dbg("ch:%c, mod: 0x%x", ch, mod);
+ 	send_char_ascii_report(ch, mod);
+}
+JNIEXPORT void JNICALL Java_com_example_common_hidp_HidpBcaster_reportString( JNIEnv* env, jobject thiz, 
+			jstring javaString )
+{
+	const char *string = (*env)->GetStringUTFChars(env, javaString, 0);
 	
-	switch (b_event) {	
-		case EV_BTN_LEFT:  if(b_type) b |= 1; else b &= ~1;  break;
-		case EV_BTN_RIGHT: if(b_type) b |= 2; else b &= ~2;  break;
-		case EV_BTN_MIDDLE:if(b_type) b |= 4; else b &= ~4;  break; 
-	}
-	if(send_mouse_report(x, y, b, 0) == -1) {
-		error("send_mouse_rep()");
-		return;
-	}		
-	
+	dbg("string:%s", string);
+	send_str_report(string);
+
+	(*env)->ReleaseStringUTFChars(env, javaString, string);
 }
 

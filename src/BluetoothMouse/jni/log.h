@@ -4,7 +4,9 @@
 #include <string.h>
 
 
-#ifdef ANDROID_LOG
+//#ifdef ANDROID_LOG
+
+#if 1
 #include <android/log.h>
 #define _error(f, a...) ((void)__android_log_print\
 	(ANDROID_LOG_ERROR,"JNI_hidp","%16s:%s (%.2d): " f ,__func__,strerror(errno),errno, ##a))

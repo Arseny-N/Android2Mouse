@@ -8,94 +8,96 @@
 #include <stdbool.h>
 #include <string.h>
 #include "hidp_client.h"
+#include "combo_conn.h"
 
 #include "log.h"
-static int fd;
-int start_session(char *addr) 
-{
-	int rv;
-	fd = open(FIFO_PATH, O_WRONLY);
-//	fd = STDOUT_FILENO;
 
+
+static struct bin_packet packet;
+static int fd;
+void send_packet( struct bin_packet *p)
+{
+	int numWritten = write(fd, (void*)p, sizeof(*p));
+	if( numWritten == sizeof(*p))
+		return;
+	error("Failed to send packet: report_id=0x%d wrote %d of %d", p->report_id, numWritten, sizeof(*p));
+}
+
+struct bin_packet *get_packet(int rid)
+{	
+	memset(&packet, 0, sizeof(packet));
+	packet.report_id = rid;
+	return &packet;
+}
+
+
+int start_session(const char *addr) 
+{
+
+	fd = open(FIFO_PATH, O_WRONLY);
 	if(fd == -1) {
 		error("open()");
 		return -1;
 	}
-
-	rv = send_conn_header(addr, 0);
-	info("Starting session with fifo %s, rv=%d", FIFO_PATH, rv);
-	return rv;
+	info("Starting session with fifo %s", FIFO_PATH);
+	return 0;
 }
 int end_session(void) 
 {
-	send_shutdown();
+	struct bin_packet *p = get_packet(SYS_REP_ID);
+	p->flags = HCR_SHUTDOWN;
+	send_packet(p);
+	
 	return close(fd);
 }
 
-int send_report(void *data, size_t size)
+void send_mouse_report(int x, int y,int buttons, int wheel)
 {
-	char buf[sizeof(struct hcr_mouse_report) + 20];
-	int rq_size = 0;
-	memset(buf, 0, sizeof(buf));
-	if(data) {
-		memcpy(buf + rq_size, data, size);
-		rq_size += size;
+	struct bin_packet *p = get_packet(MOUSE_REP_ID);
+	p->report.mouse.buttons = buttons;
+	p->report.mouse.x = x;
+	p->report.mouse.y = y;
+	p->report.mouse.wheel = wheel;
+	send_packet(p);	
+}
+ void _send_char_report(int ch, int mod, int flg)
+{	
+	struct bin_packet *p = get_packet(KBD_REP_ID);
+	p->flags = BRPT_CHAR;
+	p->flags2 = flg;
+	p->report.letter.c = ch;
+	p->report.letter.mods = mod;
+	send_packet(p);	
+}
+
+static void send_string_frag(const char *s, size_t size)
+{
+	struct bin_packet *p = get_packet(KBD_REP_ID);
+	p->flags = BRPT_STRING;
+	strncpy(p->report.string.s, s, size);
+	send_packet(p);	
+}
+void send_str_report(const char *s)
+{
+	size_t size = strlen(s);
+	int i, frags = size / MAX_STRING, s_ind=0;
+	for(i=0; i<frags; ++i) {
+		send_string_frag(&s[s_ind], MAX_STRING);
+		s_ind += MAX_STRING;
 	}
+	if(size % MAX_STRING) {
+		send_string_frag(&s[s_ind], size-s_ind);
+	}
+}
+void send_gpad_report(int x,int y,int z,int rx,int ry,int rz,int buttons)
+{
+	struct bin_packet *p = get_packet(GPAD_REP_ID);
 	
-	return write(fd, buf, rq_size);
+#define S(a) p->report.gamepad.a = a
+	S(x);S(y);
+	S(z);S(rx);
+	S(rz);S(ry);
+	S(buttons);
+#undef S	
+	send_packet(p);	
 }
-int send_shutdown(void)
-{
-	return send_mouse_report(0, 0,0, HCR_SHUTDOWN);
-}
-int send_mouse_report(int x,int y, int b, int flags)
-{
-	struct hcr_mouse_report r = { .x = x, .y = y, .b = b , .flags= flags};
-	return send_report(&r, sizeof(r));
-}
-int send_conn_header(char *addr, int p)
-{
-	struct connection_header h;
-	snprintf(h.addr, 24,"%s", addr);
-	return send_report(&h, sizeof(h));
-}
-/*
-int main(int argc, char *argv[])
-{
-	char *line = NULL, *next;
-
-	if(start_session()) {
-		perror("start_session");
-		return -1;
-	}
-#define ERR(call) if(call == -1) {perror( #call ); exit(EXIT_FAILURE); }
-
-	ERR(send_baddr(argv[1], 0));
-	
-	while(getline(&line, NULL, stdin) != -1) {
-		switch(*line) {	
-
-			case 'b': case 'B':
-				ERR(send_baddr(&line[1], 1));
-				break;
-			case 'r': case 'R':
-			{
-				char *p = &line[1];		
-				int x = strtol(p, &next, 0); p = next;
-				int y = strtol(p, &next, 0); p = next;
-				int b = strtol(p, NULL, 0);
-		
-				ERR(send_mouse_report(x, y, b));
-			}
-				break;
-			case 's': case 'S':
-				ERR(send_shutdown());
-				break;
-			case 'e': case 'E':
-				ERR(end_session());
-				return 0;
-		}
-	}
-	return 0;
-}
-*/

@@ -1,28 +1,28 @@
 
 #include <stdbool.h>
-
-struct hcr_mouse_report {
-	int x, y, b;
-	int flags; /* Shutdown */
-};
-
-struct connection_header {
-	char addr[24];
-//	int profile;
-};
-
-//#define PROFILE_MOUSE 	01
-
-
-#define HCR_SHUTDOWN 	01
-
+#include "combo_conn.h"
+#ifndef __HIDP_CLINETDLIB_H__
+#define __HIDP_CLINETDLIB_H__
 
 #define FIFO_PATH "/data/hidp_clientd.fifo"
-#define FIFO_MODE 0777
+#define HCR_SHUTDOWN 	01
 
-int start_session(char *addr);
+void _send_char_report(int ch, int mod, int flg);
+static inline void send_char_ascii_report(int ch, int mod)
+{
+	_send_char_report(ch, mod, BRPT_CHAR | CHAR_ASCII);
+}
+static inline void send_char_raw_report(int ch, int mod)
+{
+	_send_char_report(ch, mod, BRPT_CHAR | CHAR_RAW);
+
+}
+
+void send_gpad_report(int x,int y,int z,int rx,int ry,int rz,int buttons);
+void send_str_report(const char *s);
+void send_mouse_report(int x, int y,int buttons, int wheel);
+
+int start_session(const char *addr);
 int end_session(void);
 
-int send_mouse_report(int x,int y, int b, int f);
-int send_shutdown(void);
-
+#endif /* __HIDP_CLINETDLIB_H__ */

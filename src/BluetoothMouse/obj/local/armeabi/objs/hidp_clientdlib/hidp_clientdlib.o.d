@@ -57,7 +57,9 @@
  /home/arseni/Documents/mobile/ndk/platforms/android-18/arch-arm/usr/include/linux/capability.h \
  /home/arseni/Documents/mobile/ndk/platforms/android-18/arch-arm/usr/include/pathconf.h \
  /home/arseni/workspace/BluetoothMouse/jni/hidp_client.h \
- /home/arseni/workspace/BluetoothMouse/jni/log.h
+ /home/arseni/workspace/BluetoothMouse/jni/combo_conn.h \
+ /home/arseni/workspace/BluetoothMouse/jni/log.h \
+ /home/arseni/Documents/mobile/ndk/platforms/android-18/arch-arm/usr/include/android/log.h
 
 /home/arseni/Documents/mobile/ndk/platforms/android-18/arch-arm/usr/include/stdio.h:
 
@@ -173,4 +175,8 @@
 
 /home/arseni/workspace/BluetoothMouse/jni/hidp_client.h:
 
+/home/arseni/workspace/BluetoothMouse/jni/combo_conn.h:
+
 /home/arseni/workspace/BluetoothMouse/jni/log.h:
+
+/home/arseni/Documents/mobile/ndk/platforms/android-18/arch-arm/usr/include/android/log.h:

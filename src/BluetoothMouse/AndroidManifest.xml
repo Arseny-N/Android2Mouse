@@ -22,7 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BcastGestures" />
+        <activity android:name=".Mouse" />
+        <activity android:name=".Joystick" />
+        <activity android:name=".JoystickSelection" />
+        <activity android:name=".SelectBcastType" />
     </application>
 
 </manifest>

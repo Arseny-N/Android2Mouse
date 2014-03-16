@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 	public void onToggleClicked(View view) {   
 	    boolean on = ((ToggleButton) view).isChecked();
 	    if (on) {
-	    	old = becameA("mouse","");
+	    	old = becameA("multi","");
 			Log.d("BecomeAMouse", "OLD == " + old);
 			SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, 0);
 

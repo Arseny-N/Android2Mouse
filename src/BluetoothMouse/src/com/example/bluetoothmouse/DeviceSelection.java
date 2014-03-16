@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.example.common.hidp.HidpBcaster;
+
 import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
@@ -29,6 +31,9 @@ public class DeviceSelection extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_list);
+        //Intent i = new Intent(this, SelectBcastType.class);
+        //i.putExtra(KEY_ADDR, addrs.get(0));
+        //startActivityForResult(i, ACTIVITY_EDIT);
         fillData();
         
     }
@@ -62,10 +67,15 @@ public class DeviceSelection extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+    	String addr = addrs.get(position);
         super.onListItemClick(l, v, position, id);
-        Intent i = new Intent(this, BcastGestures.class);
-        i.putExtra(KEY_ADDR, addrs.get(position));
+        //Intent i = new Intent(this, BcastGestures.class);
+        
+        
+        Intent i = new Intent(this, SelectBcastType.class);
+        i.putExtra(KEY_ADDR, addr);
         startActivityForResult(i, ACTIVITY_EDIT);
+        
     }
 
     @Override
