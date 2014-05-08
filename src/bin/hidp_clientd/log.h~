@@ -18,7 +18,7 @@ struct log {
 	char *path;
 	char *buf;
 	
-	bool notToClose;
+	bool notFile;
 	unsigned long counter;
 } __log;
 
