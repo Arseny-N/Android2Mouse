@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ru">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Android2Mouse</title>
-		<link rel="stylesheet" href="css/app.css" />
+				<link rel="stylesheet" href="../css/app.css" />
 		
 	</head>
 <body>    
@@ -55,8 +55,7 @@
 					But also keep in mind that:<br>
 					<ul>
 						<li>You should have root permissions on your phone(it should be rooted).</li>
-						<li>It is moderately difficult to make it to work in some situations
-						    (see <a href="howTo.html#in-case">In case it don't work</a>). </li>
+						
 						<li>It is moderately difficult to install it(see <a href="howTo.html#how-to-install">
 						    how to install</a>) because of rooting. </li>
 					</ul>
