@@ -8,5 +8,5 @@ The main feature of Android2Mouse is that _it does not require the installation 
 
 All of the computer mouse functions and most of keyboard and game-pad functions can be performed remotely using the smartphone. 
 
-Read the complete instructions [here](http://arseny-n.github.io/Android2Mouse/doc/howTo.html "Enjoy!") 
+Read the complete instructions [here](http://arseny-n.github.io/Android2Mouse/doc/howTo.html "Enjoy!").
 
