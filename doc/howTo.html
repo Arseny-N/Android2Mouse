@@ -164,7 +164,7 @@
 		The program could be broken in three main parts: the <code> hidp_clientd</code> or daemon, the <code> bmouse</code> or attribute changer and the gui.
 		<h3>The daemon.</h3>
 		<p>
-			Its main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">hidp spec</a>.However not all the spec is implemented - it drops packets received from the host because I never receved one, so I considered it a waste of time to implement this. Sometimes it bizarrely hangs, so when you quit the giu a <code>pkill hidp_clientd</code> is triggered.
+			Its main task is to establish a l2cap connection with psm equal 0x11 and 0x13, read data from the command fifo(<code>/data/hidp_clientd.fifo</code>), interpret it and send via the l2cap sockets, this is done as written in the <a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">hidp spec</a>.
 		</p>
 		<h3>The attribute changer.</h3>
 		Its main task is to add an sdp record and change the CoD of the device [<a href="https://developer.bluetooth.org/TechnologyOverview/Pages/HID.aspx">more</a>].
